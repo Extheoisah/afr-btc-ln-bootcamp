@@ -1,0 +1,196 @@
+[
+  {
+    "id": "nairobi-2023",
+    "location": "Nairobi, Kenya",
+    "date": "2023-06-15",
+    "description": "A two-week intensive bootcamp focused on Bitcoin Lightning Network development, held at the iHub in Nairobi.",
+    "image": "/placeholder.svg?height=400&width=600&text=Nairobi+Bootcamp",
+    "students": [
+      {
+        "id": "student-1",
+        "name": "Amara Okafor",
+        "location": "Nairobi, Kenya",
+        "role": "Frontend Developer",
+        "image": "/placeholder.svg?height=200&width=200&text=AO"
+      },
+      {
+        "id": "student-2",
+        "name": "Kwame Mensah",
+        "location": "Accra, Ghana",
+        "role": "Blockchain Developer",
+        "image": "/placeholder.svg?height=200&width=200&text=KM"
+      },
+      {
+        "id": "student-3",
+        "name": "Zainab Ahmed",
+        "location": "Lagos, Nigeria",
+        "role": "Full Stack Developer",
+        "image": "/placeholder.svg?height=200&width=200&text=ZA"
+      }
+    ],
+    "instructors": [
+      {
+        "id": "instructor-1",
+        "name": "David Ngugi",
+        "location": "Nairobi, Kenya",
+        "expertise": "Lightning Network",
+        "image": "/placeholder.svg?height=200&width=200&text=DN"
+      },
+      {
+        "id": "instructor-2",
+        "name": "Sarah Johnson",
+        "location": "Cape Town, South Africa",
+        "expertise": "Bitcoin Protocol",
+        "image": "/placeholder.svg?height=200&width=200&text=SJ"
+      }
+    ],
+    "projects": [
+      {
+        "id": "project-1",
+        "name": "Lightning Wallet",
+        "description": "A mobile wallet application for managing Bitcoin Lightning payments",
+        "studentId": "student-1",
+        "studentName": "Amara Okafor"
+      },
+      {
+        "id": "project-2",
+        "name": "Bitcoin Payment Gateway",
+        "description": "A payment gateway for e-commerce sites to accept Bitcoin payments",
+        "studentId": "student-2",
+        "studentName": "Kwame Mensah"
+      }
+    ],
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "name": "Bitcoin Africa",
+        "type": "Main Sponsor",
+        "logo": "/placeholder.svg?height=100&width=100&text=BA"
+      },
+      {
+        "id": "sponsor-2",
+        "name": "Lightning Labs",
+        "type": "Technical Partner",
+        "logo": "/placeholder.svg?height=100&width=100&text=LL"
+      }
+    ]
+  },
+  {
+    "id": "lagos-2023",
+    "location": "Lagos, Nigeria",
+    "date": "2023-09-10",
+    "description": "A three-week bootcamp covering Bitcoin fundamentals and Lightning Network application development in Lagos.",
+    "image": "/placeholder.svg?height=400&width=600&text=Lagos+Bootcamp",
+    "students": [
+      {
+        "id": "student-4",
+        "name": "Chijioke Eze",
+        "location": "Lagos, Nigeria",
+        "role": "Backend Developer",
+        "image": "/placeholder.svg?height=200&width=200&text=CE"
+      },
+      {
+        "id": "student-5",
+        "name": "Fatima Diallo",
+        "location": "Dakar, Senegal",
+        "role": "Mobile Developer",
+        "image": "/placeholder.svg?height=200&width=200&text=FD"
+      }
+    ],
+    "instructors": [
+      {
+        "id": "instructor-3",
+        "name": "Michael Oluwafemi",
+        "location": "Lagos, Nigeria",
+        "expertise": "Bitcoin Applications",
+        "image": "/placeholder.svg?height=200&width=200&text=MO"
+      }
+    ],
+    "projects": [
+      {
+        "id": "project-3",
+        "name": "Bitcoin Remittance App",
+        "description": "An application for cross-border remittances using Bitcoin",
+        "studentId": "student-4",
+        "studentName": "Chijioke Eze"
+      }
+    ],
+    "sponsors": [
+      {
+        "id": "sponsor-3",
+        "name": "Qala Africa",
+        "type": "Main Sponsor",
+        "logo": "/placeholder.svg?height=100&width=100&text=QA"
+      }
+    ]
+  },
+  {
+    "id": "accra-2024",
+    "location": "Accra, Ghana",
+    "date": "2024-02-20",
+    "description": "A month-long bootcamp focused on building Bitcoin applications and Lightning Network integration in Accra.",
+    "image": "/placeholder.svg?height=400&width=600&text=Accra+Bootcamp",
+    "students": [
+      {
+        "id": "student-6",
+        "name": "Kofi Adu",
+        "location": "Accra, Ghana",
+        "role": "Blockchain Developer",
+        "image": "/placeholder.svg?height=200&width=200&text=KA"
+      },
+      {
+        "id": "student-7",
+        "name": "Nneka Okonkwo",
+        "location": "Enugu, Nigeria",
+        "role": "Full Stack Developer",
+        "image": "/placeholder.svg?height=200&width=200&text=NO"
+      }
+    ],
+    "instructors": [
+      {
+        "id": "instructor-4",
+        "name": "James Wainaina",
+        "location": "Nairobi, Kenya",
+        "expertise": "Lightning Network",
+        "image": "/placeholder.svg?height=200&width=200&text=JW"
+      },
+      {
+        "id": "instructor-5",
+        "name": "Priscilla Mensah",
+        "location": "Accra, Ghana",
+        "expertise": "Bitcoin Protocol",
+        "image": "/placeholder.svg?height=200&width=200&text=PM"
+      }
+    ],
+    "projects": [
+      {
+        "id": "project-4",
+        "name": "Bitcoin Savings App",
+        "description": "An application for saving in Bitcoin with educational features",
+        "studentId": "student-6",
+        "studentName": "Kofi Adu"
+      },
+      {
+        "id": "project-5",
+        "name": "Lightning Point of Sale",
+        "description": "A point of sale system for merchants to accept Lightning payments",
+        "studentId": "student-7",
+        "studentName": "Nneka Okonkwo"
+      }
+    ],
+    "sponsors": [
+      {
+        "id": "sponsor-4",
+        "name": "Afroblocks",
+        "type": "Main Sponsor",
+        "logo": "/placeholder.svg?height=100&width=100&text=AB"
+      },
+      {
+        "id": "sponsor-5",
+        "name": "Strike",
+        "type": "Technical Partner",
+        "logo": "/placeholder.svg?height=100&width=100&text=ST"
+      }
+    ]
+  }
+]

@@ -5,12 +5,12 @@
     "date": "2024-06-15",
     "description": "A four-days intensive bootcamp focused on Bitcoin Lightning Network development, held at the iHub in Nairobi.",
     "image": "/images/nairobi-national-park.jpg",
-    "studentIds": [
-    ],
+    "studentIds": [],
     "instructorIds": [
       "instructor-3"
     ],
     "projectIds": [
+      "61ae95c7-f03a-4ef7-b9ff-9e2b482881d8"
     ],
     "sponsorIds": [
       "sponsor-1",
@@ -23,14 +23,12 @@
     "date": "2025-05-17",
     "description": "A four-days intensive bootcamp focused on Bitcoin Lightning Network development, held at the Nexus Hub in Kaduna.",
     "image": "/images/kaduna-nigeria.webp",
-    "studentIds": [
-    ],
+    "studentIds": [],
     "instructorIds": [
       "instructor-1",
       "instructor-2"
     ],
-    "projectIds": [
-    ],
+    "projectIds": [],
     "sponsorIds": [
       "sponsor-1",
       "sponsor-2",
@@ -44,13 +42,11 @@
     "date": "2025-05-17",
     "description": "A four-days intensive bootcamp focused on Bitcoin Lightning Network development, held at the YOTA building, La Bawaleshie Road, East Legon, in Accra.",
     "image": "/images/accra-ghana.avif",
-    "studentIds": [
-    ],
+    "studentIds": [],
     "instructorIds": [
       "instructor-1"
     ],
-    "projectIds": [
-    ],
+    "projectIds": [],
     "sponsorIds": [
       "sponsor-1",
       "sponsor-2",

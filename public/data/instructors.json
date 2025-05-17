@@ -1,0 +1,37 @@
+[
+  {
+    "id": "instructor-1",
+    "name": "David Ngugi",
+    "location": "Nairobi, Kenya",
+    "expertise": "Lightning Network",
+    "image": "/placeholder.svg?height=200&width=200&text=DN"
+  },
+  {
+    "id": "instructor-2",
+    "name": "Sarah Johnson",
+    "location": "Cape Town, South Africa",
+    "expertise": "Bitcoin Protocol",
+    "image": "/placeholder.svg?height=200&width=200&text=SJ"
+  },
+  {
+    "id": "instructor-3",
+    "name": "Michael Oluwafemi",
+    "location": "Lagos, Nigeria",
+    "expertise": "Bitcoin Applications",
+    "image": "/placeholder.svg?height=200&width=200&text=MO"
+  },
+  {
+    "id": "instructor-4",
+    "name": "James Wainaina",
+    "location": "Nairobi, Kenya",
+    "expertise": "Lightning Network",
+    "image": "/placeholder.svg?height=200&width=200&text=JW"
+  },
+  {
+    "id": "instructor-5",
+    "name": "Priscilla Mensah",
+    "location": "Accra, Ghana",
+    "expertise": "Bitcoin Protocol",
+    "image": "/placeholder.svg?height=200&width=200&text=PM"
+  }
+] 

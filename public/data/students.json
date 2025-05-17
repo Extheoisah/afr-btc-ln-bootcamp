@@ -1,0 +1,51 @@
+[
+  {
+    "id": "student-1",
+    "name": "Amara Okafor",
+    "location": "Nairobi, Kenya",
+    "role": "Frontend Developer",
+    "image": "/placeholder.svg?height=200&width=200&text=AO"
+  },
+  {
+    "id": "student-2",
+    "name": "Kwame Mensah",
+    "location": "Accra, Ghana",
+    "role": "Blockchain Developer",
+    "image": "/placeholder.svg?height=200&width=200&text=KM"
+  },
+  {
+    "id": "student-3",
+    "name": "Zainab Ahmed",
+    "location": "Lagos, Nigeria",
+    "role": "Full Stack Developer",
+    "image": "/placeholder.svg?height=200&width=200&text=ZA"
+  },
+  {
+    "id": "student-4",
+    "name": "Chijioke Eze",
+    "location": "Lagos, Nigeria",
+    "role": "Backend Developer",
+    "image": "/placeholder.svg?height=200&width=200&text=CE"
+  },
+  {
+    "id": "student-5",
+    "name": "Fatima Diallo",
+    "location": "Dakar, Senegal",
+    "role": "Mobile Developer",
+    "image": "/placeholder.svg?height=200&width=200&text=FD"
+  },
+  {
+    "id": "student-6",
+    "name": "Kofi Adu",
+    "location": "Accra, Ghana",
+    "role": "Blockchain Developer",
+    "image": "/placeholder.svg?height=200&width=200&text=KA"
+  },
+  {
+    "id": "student-7",
+    "name": "Nneka Okonkwo",
+    "location": "Enugu, Nigeria",
+    "role": "Full Stack Developer",
+    "image": "/placeholder.svg?height=200&width=200&text=NO"
+  }
+] 

@@ -1,22 +1,25 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { bootcamps } from "@/lib/data"
+import { getAllBootcampsWithDetails } from "@/lib/data"
 import { MapPin } from "lucide-react"
 import Image from "next/image"
+import type { Instructor } from "@/types/bootcamp"
 
 export default function InstructorsPage() {
+  const bootcamps = getAllBootcampsWithDetails()
+  
   // Collect all instructors from all bootcamps
   const allInstructors = bootcamps.flatMap((bootcamp) =>
     bootcamp.instructors.map((instructor) => ({
       ...instructor,
       bootcampLocation: bootcamp.location,
       bootcampId: bootcamp.id,
-    })),
+    }))
   )
 
   // Remove duplicates (instructors who taught at multiple bootcamps)
   const uniqueInstructors = Array.from(
-    new Map(allInstructors.map((instructor) => [instructor.id, instructor])).values(),
-  )
+    new Map(allInstructors.map((instructor) => [instructor.id, instructor])).values()
+  ) as (Instructor & { bootcampLocation: string; bootcampId: string })[]
 
   return (
     <div className="container mx-auto px-4 py-12">

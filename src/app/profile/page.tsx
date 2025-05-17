@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { bootcamps } from "@/lib/data"
+import { getAllBootcampsWithDetails } from "@/lib/data"
 import { saveProfile } from "@/lib/profile-service"
 import { toast } from "sonner"
 import Image from "next/image"
@@ -17,6 +17,7 @@ import Image from "next/image"
 export default function ProfilePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const bootcamps = getAllBootcampsWithDetails()
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]

@@ -12,7 +12,7 @@ export interface Instructor {
   name: string;
   location: string;
   expertise: string;
-  image: string;
+  image?: string;
   bio?: string;
 }
 
@@ -38,8 +38,8 @@ export interface Bootcamp {
   date: string;
   description: string;
   image: string;
-  students: Student[];
-  instructors: Instructor[];
-  projects: Project[];
-  sponsors: Sponsor[];
+  studentIds: string[];
+  instructorIds: string[];
+  projectIds: string[];
+  sponsorIds: string[];
 } 

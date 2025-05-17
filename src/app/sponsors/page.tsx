@@ -1,20 +1,25 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { bootcamps } from "@/lib/data"
+import { getAllBootcampsWithDetails } from "@/lib/data"
 import { ExternalLink } from "lucide-react"
 import Image from "next/image"
+import type { Sponsor } from "@/types/bootcamp"
 
 export default function SponsorsPage() {
+  const bootcamps = getAllBootcampsWithDetails()
+  
   // Collect all sponsors from all bootcamps
   const allSponsors = bootcamps.flatMap((bootcamp) =>
     bootcamp.sponsors.map((sponsor) => ({
       ...sponsor,
       bootcampLocation: bootcamp.location,
       bootcampId: bootcamp.id,
-    })),
+    }))
   )
 
   // Remove duplicates (sponsors who supported multiple bootcamps)
-  const uniqueSponsors = Array.from(new Map(allSponsors.map((sponsor) => [sponsor.id, sponsor])).values())
+  const uniqueSponsors = Array.from(
+    new Map(allSponsors.map((sponsor) => [sponsor.id, sponsor])).values()
+  ) as (Sponsor & { bootcampLocation: string; bootcampId: string })[]
 
   return (
     <div className="container mx-auto px-4 py-12">

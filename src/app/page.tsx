@@ -8,11 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { bootcamps } from "@/lib/data";
+import { getAllBootcampsWithDetails } from "@/lib/data";
 import { Bitcoin } from "lucide-react";
 import Image from "next/image";
 
 export default function HomePage() {
+  const bootcamps = getAllBootcampsWithDetails();
+  
   return (
     <div className="container mx-auto px-4 py-12">
       <header className="mb-12 text-center">

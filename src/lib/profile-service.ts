@@ -3,7 +3,8 @@
 import fs from "fs"
 import path from "path"
 import { v4 as uuidv4 } from "uuid"
-import { bootcamps } from "./data"
+import { getBootcamps } from "./data"
+import type { Bootcamp } from "@/types/bootcamp"
 
 interface ProfileData {
   name: string
@@ -26,14 +27,14 @@ export async function saveProfile(profileData: ProfileData) {
     }
 
     // Read existing data or create new if file doesn't exist
-    let bootcampsData = bootcamps
+    let bootcampsData = getBootcamps()
     if (fs.existsSync(dataFilePath)) {
       const fileContent = fs.readFileSync(dataFilePath, "utf8")
-      bootcampsData = JSON.parse(fileContent)
+      bootcampsData = JSON.parse(fileContent) as Bootcamp[]
     }
 
     // Find the bootcamp
-    const bootcampIndex = bootcampsData.findIndex((b) => b.id === profileData.bootcampId)
+    const bootcampIndex = bootcampsData.findIndex((b: Bootcamp) => b.id === profileData.bootcampId)
     if (bootcampIndex === -1) {
       throw new Error("Bootcamp not found")
     }
@@ -72,11 +73,26 @@ export async function saveProfile(profileData: ProfileData) {
       image: imagePath,
     }
 
-    // Add student to bootcamp
-    bootcampsData[bootcampIndex].students.push(newStudent)
+    // Initialize students array if it doesn't exist
+    if (!bootcampsData[bootcampIndex].studentIds) {
+      bootcampsData[bootcampIndex].studentIds = []
+    }
+
+    // Add student ID to bootcamp
+    bootcampsData[bootcampIndex].studentIds.push(newStudent.id)
 
     // Save updated data back to file
     fs.writeFileSync(dataFilePath, JSON.stringify(bootcampsData, null, 2))
+
+    // Save student data
+    const studentsFilePath = path.join(process.cwd(), "public", "data", "students.json")
+    let studentsData = []
+    if (fs.existsSync(studentsFilePath)) {
+      const fileContent = fs.readFileSync(studentsFilePath, "utf8")
+      studentsData = JSON.parse(fileContent)
+    }
+    studentsData.push(newStudent)
+    fs.writeFileSync(studentsFilePath, JSON.stringify(studentsData, null, 2))
 
     return { success: true }
   } catch (error) {

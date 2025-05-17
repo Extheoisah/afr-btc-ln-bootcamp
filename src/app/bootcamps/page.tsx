@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { bootcamps } from "@/lib/data";
+import { getBootcamps } from "@/lib/data";
 import { MapPin, Calendar, Users } from "lucide-react";
 import Image from "next/image";
 
@@ -18,7 +18,7 @@ export default function BootcampsPage() {
       <h1 className="text-3xl font-bold mb-8">All Bootcamps</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {bootcamps.map((bootcamp) => (
+        {getBootcamps().map((bootcamp) => (
           <Card key={bootcamp.id} className="flex flex-col">
             <div className="h-48 overflow-hidden relative">
               <Image
@@ -44,7 +44,7 @@ export default function BootcampsPage() {
               <div className="space-y-2">
                 <div className="flex items-center text-sm">
                   <Users className="mr-2 h-4 w-4" />
-                  <span>{bootcamp.students.length} Students</span>
+                  <span>{bootcamp.studentIds.length} Students</span>
                 </div>
                 <div className="flex items-center text-sm">
                   <MapPin className="mr-2 h-4 w-4" />

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "sponsor-1",
+    "name": "Bitcoin Africa",
+    "type": "Main Sponsor",
+    "logo": "/placeholder.svg?height=100&width=100&text=BA",
+    "website": "https://bitcoin.africa"
+  },
+  {
+    "id": "sponsor-2",
+    "name": "Lightning Labs",
+    "type": "Technical Partner",
+    "logo": "/placeholder.svg?height=100&width=100&text=LL",
+    "website": "https://lightning.engineering"
+  },
+  {
+    "id": "sponsor-3",
+    "name": "Qala Africa",
+    "type": "Main Sponsor",
+    "logo": "/placeholder.svg?height=100&width=100&text=QA",
+    "website": "https://qala.dev"
+  },
+  {
+    "id": "sponsor-4",
+    "name": "Afroblocks",
+    "type": "Main Sponsor",
+    "logo": "/placeholder.svg?height=100&width=100&text=AB",
+    "website": "https://afroblocks.org"
+  },
+  {
+    "id": "sponsor-5",
+    "name": "Strike",
+    "type": "Technical Partner",
+    "logo": "/placeholder.svg?height=100&width=100&text=ST",
+    "website": "https://strike.me"
+  }
+] 

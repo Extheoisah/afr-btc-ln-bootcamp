@@ -36,6 +36,12 @@ export default function Footer() {
             >
               Sponsors
             </Link>
+            <Link
+              href="/projects"
+              className="text-sm text-muted-foreground hover:text-primary"
+            >
+              Projects
+            </Link>
           </div>
         </div>
 

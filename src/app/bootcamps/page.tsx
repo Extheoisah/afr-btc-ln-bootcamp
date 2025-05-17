@@ -11,14 +11,17 @@ import { Button } from "@/components/ui/button";
 import { getBootcamps } from "@/lib/data";
 import { MapPin, Calendar, Users } from "lucide-react";
 import Image from "next/image";
+import type { Bootcamp } from "@/types/bootcamp";
 
-export default function BootcampsPage() {
+export default async function BootcampsPage() {
+  const bootcamps = await getBootcamps();
+
   return (
     <div className="container mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-8">All Bootcamps</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {getBootcamps().map((bootcamp) => (
+        {bootcamps.map((bootcamp: Bootcamp) => (
           <Card key={bootcamp.id} className="flex flex-col">
             <div className="h-48 overflow-hidden relative">
               <Image
@@ -40,7 +43,6 @@ export default function BootcampsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
-              <p className="mb-4 line-clamp-3">{bootcamp.description}</p>
               <div className="space-y-2">
                 <div className="flex items-center text-sm">
                   <Users className="mr-2 h-4 w-4" />

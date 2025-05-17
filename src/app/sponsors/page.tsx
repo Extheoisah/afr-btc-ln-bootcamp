@@ -4,12 +4,12 @@ import { ExternalLink } from "lucide-react"
 import Image from "next/image"
 import type { Sponsor } from "@/types/bootcamp"
 
-export default function SponsorsPage() {
-  const bootcamps = getAllBootcampsWithDetails()
+export default async function SponsorsPage() {
+  const bootcamps = await getAllBootcampsWithDetails()
   
   // Collect all sponsors from all bootcamps
   const allSponsors = bootcamps.flatMap((bootcamp) =>
-    bootcamp.sponsors.map((sponsor) => ({
+    (bootcamp.sponsors || []).map((sponsor) => ({
       ...sponsor,
       bootcampLocation: bootcamp.location,
       bootcampId: bootcamp.id,

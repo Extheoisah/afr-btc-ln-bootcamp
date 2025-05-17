@@ -3,8 +3,8 @@ export interface Student {
   name: string;
   location: string;
   role: string;
-  image?: string;
   bio?: string;
+  image?: string;
 }
 
 export interface Instructor {
@@ -12,23 +12,24 @@ export interface Instructor {
   name: string;
   location: string;
   expertise: string;
-  image?: string;
   bio?: string;
+  image?: string;
 }
 
 export interface Project {
   id: string;
   name: string;
   description: string;
-  studentId: string;
-  studentName: string;
+  githubUrl?: string;
+  demoUrl?: string;
+  image?: string;
 }
 
 export interface Sponsor {
   id: string;
   name: string;
   type: string;
-  logo: string;
+  logo?: string;
   website?: string;
 }
 
@@ -36,10 +37,14 @@ export interface Bootcamp {
   id: string;
   location: string;
   date: string;
-  description: string;
-  image: string;
+  image?: string;
   studentIds: string[];
   instructorIds: string[];
   projectIds: string[];
   sponsorIds: string[];
+  // Populated arrays after data fetching
+  students?: Student[];
+  instructors?: Instructor[];
+  projects?: Project[];
+  sponsors?: Sponsor[];
 } 

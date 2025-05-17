@@ -4,12 +4,12 @@ import { MapPin } from "lucide-react"
 import Image from "next/image"
 import type { Instructor } from "@/types/bootcamp"
 
-export default function InstructorsPage() {
-  const bootcamps = getAllBootcampsWithDetails()
+export default async function InstructorsPage() {
+  const bootcamps = await getAllBootcampsWithDetails()
   
   // Collect all instructors from all bootcamps
   const allInstructors = bootcamps.flatMap((bootcamp) =>
-    bootcamp.instructors.map((instructor) => ({
+    (bootcamp.instructors || []).map((instructor) => ({
       ...instructor,
       bootcampLocation: bootcamp.location,
       bootcampId: bootcamp.id,

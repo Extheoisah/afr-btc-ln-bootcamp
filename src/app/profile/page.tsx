@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -14,12 +13,30 @@ import { saveProfile } from "@/lib/profile-service"
 import { toast } from "sonner"
 import Image from "next/image"
 import { ExternalLink } from "lucide-react"
+import type { Bootcamp } from "@/types/bootcamp"
 
 export default function ProfilePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [pullRequestUrl, setPullRequestUrl] = useState<string | null>(null)
-  const bootcamps = getAllBootcampsWithDetails()
+  const [bootcamps, setBootcamps] = useState<Bootcamp[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadBootcamps() {
+      try {
+        const data = await getAllBootcampsWithDetails()
+        setBootcamps(data)
+      } catch (error) {
+        console.error("Error loading bootcamps:", error)
+        toast.error("Failed to load bootcamps")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadBootcamps()
+  }, [])
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -63,6 +80,21 @@ export default function ProfilePage() {
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-2xl mx-auto">
+          <Card>
+            <CardHeader>
+              <CardTitle>Loading...</CardTitle>
+              <CardDescription>Please wait while we load the bootcamp data.</CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+      </div>
+    )
   }
 
   return (

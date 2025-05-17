@@ -8,14 +8,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  getBootcamps,
-  getInstructors,
-  getProjects,
-  getSponsors,
-  getStudents,
-} from "@/lib/data";
-import { ArrowLeft, MapPin, Calendar } from "lucide-react";
+import { getBootcampWithDetails } from "@/lib/data";
+import { ArrowLeft, MapPin, Calendar, ExternalLink } from "lucide-react";
 import Image from "next/image";
 
 interface BootcampPageProps {
@@ -24,8 +18,8 @@ interface BootcampPageProps {
   };
 }
 
-export default function BootcampPage({ params }: BootcampPageProps) {
-  const bootcamp = getBootcamps().find((b) => b.id === params.id);
+export default async function BootcampPage({ params }: BootcampPageProps) {
+  const bootcamp = await getBootcampWithDetails(params.id);
 
   if (!bootcamp) {
     notFound();
@@ -33,7 +27,7 @@ export default function BootcampPage({ params }: BootcampPageProps) {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <Link href="/" className="flex items-center mb-6 text-sm hover:underline">
+      <Link href="/bootcamps" className="flex items-center mb-6 text-sm hover:underline">
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to all bootcamps
       </Link>
@@ -70,7 +64,6 @@ export default function BootcampPage({ params }: BootcampPageProps) {
                 {bootcamp.location}
               </div>
             </div>
-            <p className="text-lg">{bootcamp.description}</p>
           </div>
 
           <Tabs defaultValue="students">
@@ -83,92 +76,112 @@ export default function BootcampPage({ params }: BootcampPageProps) {
             <TabsContent value="students" className="space-y-6">
               <h2 className="text-2xl font-bold mb-4">Students</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {getStudents()
-                  .filter((student) => bootcamp.studentIds.includes(student.id))
-                  .map((student) => (
-                    <Card key={student.id}>
-                      <div className="h-32 w-32 overflow-hidden rounded-full relative">
-                        <Image
-                          src={
-                            student.image ||
-                            `/placeholder.svg?height=200&width=200&text=${student.name}`
-                          }
-                          alt={student.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <CardHeader>
-                        <CardTitle>{student.name}</CardTitle>
-                        <CardDescription className="flex items-center">
-                          <MapPin className="mr-1 h-3 w-3" /> {student.location}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-muted-foreground">
-                          {student.role}
+                {bootcamp.students.map((student) => (
+                  <Card key={student.id}>
+                    <div className="h-32 w-32 overflow-hidden rounded-full relative mx-auto mt-6">
+                      <Image
+                        src={
+                          student.image ||
+                          `/placeholder.svg?height=200&width=200&text=${student.name}`
+                        }
+                        alt={student.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <CardHeader>
+                      <CardTitle>{student.name}</CardTitle>
+                      <CardDescription className="flex items-center">
+                        <MapPin className="mr-1 h-3 w-3" /> {student.location}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground">
+                        {student.role}
+                      </p>
+                      {student.bio && (
+                        <p className="text-sm text-muted-foreground mt-2">
+                          {student.bio}
                         </p>
-                      </CardContent>
-                    </Card>
-                  ))}
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </TabsContent>
 
             <TabsContent value="instructors" className="space-y-6">
               <h2 className="text-2xl font-bold mb-4">Instructors</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {getInstructors()
-                  .filter((instructor) =>
-                    bootcamp.instructorIds.includes(instructor.id)
-                  )
-                  .map((instructor) => (
-                    <Card key={instructor.id}>
-                      <div className="h-32 w-32 overflow-hidden rounded-full relative">
-                        <Image
-                          src={
-                            instructor.image ||
-                            `/placeholder.svg?height=200&width=200&text=${instructor.name}`
-                          }
-                          alt={instructor.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <CardHeader>
-                        <CardTitle>{instructor.name}</CardTitle>
-                        <CardDescription className="flex items-center">
-                          <MapPin className="mr-1 h-3 w-3" />{" "}
-                          {instructor.location}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-muted-foreground">
-                          {instructor.expertise}
+                {bootcamp.instructors.map((instructor) => (
+                  <Card key={instructor.id}>
+                    <div className="h-32 w-32 overflow-hidden rounded-full relative mx-auto mt-6">
+                      <Image
+                        src={
+                          instructor.image ||
+                          `/placeholder.svg?height=200&width=200&text=${instructor.name}`
+                        }
+                        alt={instructor.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <CardHeader>
+                      <CardTitle>{instructor.name}</CardTitle>
+                      <CardDescription className="flex items-center">
+                        <MapPin className="mr-1 h-3 w-3" /> {instructor.location}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground">
+                        {instructor.expertise}
+                      </p>
+                      {instructor.bio && (
+                        <p className="text-sm text-muted-foreground mt-2">
+                          {instructor.bio}
                         </p>
-                      </CardContent>
-                    </Card>
-                  ))}
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </TabsContent>
 
             <TabsContent value="projects" className="space-y-6">
               <h2 className="text-2xl font-bold mb-4">Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {getProjects()
-                  .filter((project) => bootcamp.projectIds.includes(project.id))
-                  .map((project) => (
-                    <Card key={project.id}>
-                      <CardHeader>
-                        <CardTitle>{project.name}</CardTitle>
-                        <CardDescription>
-                          By: {project.studentName}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <p>{project.description}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
+                {bootcamp.projects.map((project) => (
+                  <Card key={project.id}>
+                    <CardHeader>
+                      <CardTitle>{project.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p>{project.description}</p>
+                      <div className="flex gap-4 mt-4">
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center text-sm text-primary hover:underline"
+                          >
+                            GitHub <ExternalLink className="ml-1 h-3 w-3" />
+                          </a>
+                        )}
+                        {project.demoUrl && (
+                          <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center text-sm text-primary hover:underline"
+                          >
+                            Demo <ExternalLink className="ml-1 h-3 w-3" />
+                          </a>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </TabsContent>
           </Tabs>
@@ -180,29 +193,37 @@ export default function BootcampPage({ params }: BootcampPageProps) {
               <CardTitle>Bootcamp Sponsors</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {getSponsors()
-                .filter((sponsor) => bootcamp.sponsorIds.includes(sponsor.id))
-                .map((sponsor) => (
-                  <div key={sponsor.id} className="flex items-center space-x-4">
-                    <div className="h-12 w-12 overflow-hidden rounded relative">
-                      <Image
-                        src={
-                          sponsor.logo ||
-                          `/placeholder.svg?height=50&width=50&text=${sponsor.name}`
-                        }
-                        alt={sponsor.name}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-medium">{sponsor.name}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {sponsor.type}
-                      </p>
-                    </div>
+              {bootcamp.sponsors.map((sponsor) => (
+                <div key={sponsor.id} className="flex items-center space-x-4">
+                  <div className="h-12 w-12 overflow-hidden rounded relative">
+                    <Image
+                      src={
+                        sponsor.logo ||
+                        `/placeholder.svg?height=50&width=50&text=${sponsor.name}`
+                      }
+                      alt={sponsor.name}
+                      fill
+                      className="object-contain"
+                    />
                   </div>
-                ))}
+                  <div>
+                    <h3 className="font-medium">{sponsor.name}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {sponsor.type}
+                    </p>
+                    {sponsor.website && (
+                      <a
+                        href={sponsor.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-primary hover:underline flex items-center mt-1"
+                      >
+                        Website <ExternalLink className="ml-1 h-3 w-3" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
             </CardContent>
           </Card>
         </div>

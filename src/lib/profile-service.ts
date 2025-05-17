@@ -1,11 +1,8 @@
 "use server"
 
-import fs from "fs"
-import path from "path"
-import { v4 as uuidv4 } from "uuid"
-import { getBootcamps } from "./data"
 import { createPullRequest } from "./github"
-import type { Bootcamp } from "@/types/bootcamp"
+import { getBootcamps, getStudents } from "./data"
+import type { Student } from "@/types/bootcamp"
 
 interface ProfileData {
   name: string
@@ -18,72 +15,66 @@ interface ProfileData {
 
 export async function saveProfile(profileData: ProfileData) {
   try {
-    // Handle image if provided
-    let imagePath = undefined
-    if (profileData.image && profileData.image.startsWith("data:image")) {
-      const imageId = uuidv4()
-      const imageDir = path.join(process.cwd(), "public", "uploads")
-
-      // Create uploads directory if it doesn't exist
-      if (!fs.existsSync(imageDir)) {
-        fs.mkdirSync(imageDir, { recursive: true })
-      }
-
-      // Extract base64 data and save as file
-      const matches = profileData.image.match(/^data:image\/([A-Za-z-+/]+);base64,(.+)$/)
-      if (matches && matches.length === 3) {
-        const imageType = matches[1]
-        const imageData = Buffer.from(matches[2], "base64")
-        const fileName = `${imageId}.${imageType}`
-        const filePath = path.join(imageDir, fileName)
-
-        fs.writeFileSync(filePath, imageData)
-        imagePath = `/uploads/${fileName}`
-      }
-    }
-
-    // Read current students data
-    const studentsFilePath = path.join(process.cwd(), "public", "data", "students.json")
-    let studentsData = []
-    if (fs.existsSync(studentsFilePath)) {
-      const fileContent = fs.readFileSync(studentsFilePath, "utf8")
-      studentsData = JSON.parse(fileContent)
-    }
+    // Fetch current data
+    const [students, bootcamps] = await Promise.all([
+      getStudents(),
+      getBootcamps(),
+    ]);
 
     // Create new student object
-    const newStudent = {
-      id: uuidv4(),
+    const newStudent: Student = {
+      id: crypto.randomUUID(),
       name: profileData.name,
       location: profileData.location,
       role: profileData.role,
       bio: profileData.bio,
-      image: imagePath,
-    }
+      image: profileData.image || undefined,
+    };
 
     // Add new student to the array
-    studentsData.push(newStudent)
-
-    // Read bootcamps data
-    const bootcampsFilePath = path.join(process.cwd(), "public", "data", "bootcamps.json")
-    let bootcampsData = getBootcamps()
-    if (fs.existsSync(bootcampsFilePath)) {
-      const fileContent = fs.readFileSync(bootcampsFilePath, "utf8")
-      bootcampsData = JSON.parse(fileContent) as Bootcamp[]
-    }
+    students.push(newStudent);
 
     // Find the bootcamp and add student ID
-    const bootcampIndex = bootcampsData.findIndex((b: Bootcamp) => b.id === profileData.bootcampId)
+    const bootcampIndex = bootcamps.findIndex(b => b.id === profileData.bootcampId);
     if (bootcampIndex === -1) {
-      throw new Error("Bootcamp not found")
+      throw new Error("Bootcamp not found");
     }
 
     // Initialize students array if it doesn't exist
-    if (!bootcampsData[bootcampIndex].studentIds) {
-      bootcampsData[bootcampIndex].studentIds = []
+    if (!bootcamps[bootcampIndex].studentIds) {
+      bootcamps[bootcampIndex].studentIds = [];
     }
 
     // Add student ID to bootcamp
-    bootcampsData[bootcampIndex].studentIds.push(newStudent.id)
+    bootcamps[bootcampIndex].studentIds.push(newStudent.id);
+
+    // If there's an image, prepare it for the pull request
+    const files = [
+      {
+        path: "public/data/students.json",
+        content: JSON.stringify(students, null, 2),
+      },
+      {
+        path: "public/data/bootcamps.json",
+        content: JSON.stringify(bootcamps, null, 2),
+      },
+    ];
+
+    if (profileData.image && profileData.image.startsWith("data:image")) {
+      const imageId = crypto.randomUUID();
+      const matches = profileData.image.match(/^data:image\/([A-Za-z-+/]+);base64,(.+)$/);
+      if (matches && matches.length === 3) {
+        const imageType = matches[1];
+        const fileName = `${imageId}.${imageType}`;
+        const imagePath = `/uploads/${fileName}`;
+        newStudent.image = imagePath;
+        
+        files.push({
+          path: `public${imagePath}`,
+          content: matches[2], // Get the base64 content without the prefix
+        });
+      }
+    }
 
     // Create pull request
     const result = await createPullRequest({
@@ -94,25 +85,16 @@ export async function saveProfile(profileData: ProfileData) {
 - **Name**: ${profileData.name}
 - **Location**: ${profileData.location}
 - **Role**: ${profileData.role}
-- **Bootcamp**: ${bootcampsData[bootcampIndex].location}
+- **Bootcamp**: ${bootcamps[bootcampIndex].location}
 
 ${profileData.bio ? `\n### Bio\n${profileData.bio}` : ""}
       `,
-      files: [
-        {
-          path: "public/data/students.json",
-          content: JSON.stringify(studentsData, null, 2),
-        },
-        {
-          path: "public/data/bootcamps.json",
-          content: JSON.stringify(bootcampsData, null, 2),
-        },
-      ],
-    })
+      files,
+    });
 
-    return { success: true, pullRequestUrl: result.pullRequestUrl }
+    return { success: true, pullRequestUrl: result.pullRequestUrl };
   } catch (error) {
-    console.error("Error saving profile:", error)
-    throw new Error("Failed to save profile")
+    console.error("Error saving profile:", error);
+    throw new Error("Failed to save profile");
   }
 }

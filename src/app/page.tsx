@@ -12,8 +12,8 @@ import { getAllBootcampsWithDetails } from "@/lib/data";
 import { Bitcoin } from "lucide-react";
 import Image from "next/image";
 
-export default function HomePage() {
-  const bootcamps = getAllBootcampsWithDetails();
+export default async function HomePage() {
+  const bootcamps = await getAllBootcampsWithDetails();
   
   return (
     <div className="container mx-auto px-4 py-12">
@@ -51,11 +51,11 @@ export default function HomePage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="mb-2">{bootcamp.students.length} Students</p>
+                <p className="mb-2">{bootcamp.students?.length || 0} Students</p>
                 <p className="mb-2">
-                  {bootcamp.instructors.length} Instructors
+                  {bootcamp.instructors?.length || 0} Instructors
                 </p>
-                <p>{bootcamp.projects.length} Projects</p>
+                <p>{bootcamp.projects?.length || 0} Projects</p>
               </CardContent>
               <CardFooter>
                 <Link href={`/bootcamp/${bootcamp.id}`} className="w-full">

@@ -1,33 +1,30 @@
 import type { Bootcamp, Student, Instructor, Project, Sponsor } from "@/types/bootcamp"
 
-async function fetchJson<T>(path: string): Promise<T> {
-  // Use window.location.origin in client components, or hardcode the base URL in server components
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
-  const response = await fetch(`${baseUrl}${path}`);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${path}`);
-  }
-  return response.json();
-}
+// Import JSON files directly
+import bootcampsData from '../../public/data/bootcamps.json'
+import studentsData from '../../public/data/students.json'
+import instructorsData from '../../public/data/instructors.json'
+import projectsData from '../../public/data/projects.json'
+import sponsorsData from '../../public/data/sponsors.json'
 
 export async function getBootcamps(): Promise<Bootcamp[]> {
-  return fetchJson<Bootcamp[]>("/data/bootcamps.json");
+  return bootcampsData as Bootcamp[];
 }
 
 export async function getStudents(): Promise<Student[]> {
-  return fetchJson<Student[]>("/data/students.json");
+  return studentsData as Student[];
 }
 
 export async function getInstructors(): Promise<Instructor[]> {
-  return fetchJson<Instructor[]>("/data/instructors.json");
+  return instructorsData as Instructor[];
 }
 
 export async function getProjects(): Promise<Project[]> {
-  return fetchJson<Project[]>("/data/projects.json");
+  return projectsData as Project[];
 }
 
 export async function getSponsors(): Promise<Sponsor[]> {
-  return fetchJson<Sponsor[]>("/data/sponsors.json");
+  return sponsorsData as Sponsor[];
 }
 
 export async function getBootcampWithDetails(bootcampId: string): Promise<(Bootcamp & {
@@ -36,23 +33,15 @@ export async function getBootcampWithDetails(bootcampId: string): Promise<(Bootc
   projects: Project[];
   sponsors: Sponsor[];
 }) | null> {
-  const [bootcamps, students, instructors, projects, sponsors] = await Promise.all([
-    getBootcamps(),
-    getStudents(),
-    getInstructors(),
-    getProjects(),
-    getSponsors(),
-  ]);
-
-  const bootcamp = bootcamps.find((b: Bootcamp) => b.id === bootcampId);
+  const bootcamp = (bootcampsData as Bootcamp[]).find((b) => b.id === bootcampId);
   if (!bootcamp) return null;
 
   return {
     ...bootcamp,
-    students: bootcamp.studentIds?.map(id => students.find(s => s.id === id)).filter((s): s is Student => s !== undefined) || [],
-    instructors: bootcamp.instructorIds?.map(id => instructors.find(i => i.id === id)).filter((i): i is Instructor => i !== undefined) || [],
-    projects: bootcamp.projectIds?.map(id => projects.find(p => p.id === id)).filter((p): p is Project => p !== undefined) || [],
-    sponsors: bootcamp.sponsorIds?.map(id => sponsors.find(s => s.id === id)).filter((s): s is Sponsor => s !== undefined) || [],
+    students: bootcamp.studentIds?.map(id => (studentsData as Student[]).find(s => s.id === id)).filter(Boolean) as Student[] || [],
+    instructors: bootcamp.instructorIds?.map(id => (instructorsData as Instructor[]).find(i => i.id === id)).filter(Boolean) as Instructor[] || [],
+    projects: bootcamp.projectIds?.map(id => (projectsData as Project[]).find(p => p.id === id)).filter(Boolean) as Project[] || [],
+    sponsors: bootcamp.sponsorIds?.map(id => (sponsorsData as Sponsor[]).find(s => s.id === id)).filter(Boolean) as Sponsor[] || [],
   };
 }
 
@@ -62,19 +51,11 @@ export async function getAllBootcampsWithDetails(): Promise<(Bootcamp & {
   projects: Project[];
   sponsors: Sponsor[];
 })[]> {
-  const [bootcamps, students, instructors, projects, sponsors] = await Promise.all([
-    getBootcamps(),
-    getStudents(),
-    getInstructors(),
-    getProjects(),
-    getSponsors(),
-  ]);
-
-  return bootcamps.map((bootcamp: Bootcamp) => ({
+  return (bootcampsData as Bootcamp[]).map((bootcamp) => ({
     ...bootcamp,
-    students: bootcamp.studentIds?.map(id => students.find(s => s.id === id)).filter((s): s is Student => s !== undefined) || [],
-    instructors: bootcamp.instructorIds?.map(id => instructors.find(i => i.id === id)).filter((i): i is Instructor => i !== undefined) || [],
-    projects: bootcamp.projectIds?.map(id => projects.find(p => p.id === id)).filter((p): p is Project => p !== undefined) || [],
-    sponsors: bootcamp.sponsorIds?.map(id => sponsors.find(s => s.id === id)).filter((s): s is Sponsor => s !== undefined) || [],
+    students: bootcamp.studentIds?.map(id => (studentsData as Student[]).find(s => s.id === id)).filter(Boolean) as Student[] || [],
+    instructors: bootcamp.instructorIds?.map(id => (instructorsData as Instructor[]).find(i => i.id === id)).filter(Boolean) as Instructor[] || [],
+    projects: bootcamp.projectIds?.map(id => (projectsData as Project[]).find(p => p.id === id)).filter(Boolean) as Project[] || [],
+    sponsors: bootcamp.sponsorIds?.map(id => (sponsorsData as Sponsor[]).find(s => s.id === id)).filter(Boolean) as Sponsor[] || [],
   }));
 }

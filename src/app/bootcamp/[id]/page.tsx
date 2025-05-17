@@ -13,12 +13,13 @@ import { ArrowLeft, MapPin, Calendar, ExternalLink } from "lucide-react";
 import Image from "next/image";
 
 interface BootcampPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default async function BootcampPage({ params }: BootcampPageProps) {
+export default async function BootcampPage(props: BootcampPageProps) {
+  const params = await props.params;
   const bootcamp = await getBootcampWithDetails(params.id);
 
   if (!bootcamp) {

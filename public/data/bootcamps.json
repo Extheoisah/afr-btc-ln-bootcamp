@@ -31,8 +31,7 @@
     "image": "/images/lagos-nigeria.webp",
     "studentIds": [
       "student-4",
-      "student-5",
-      "7a1af429-02a2-4288-a9a7-c5127ecf8cfd"
+      "student-5"
     ],
     "instructorIds": [
       "instructor-3"
@@ -52,7 +51,10 @@
     "image": "/images/accra-ghana.avif",
     "studentIds": [
       "student-6",
-      "student-7"
+      "student-7",
+      "aaa610bc-37fd-4365-b95e-f24e9c4e4cff",
+      "a3a0251a-d1c7-443f-9626-3605faeac9f6",
+      "9c0dbf34-ce0b-416e-b00a-6b0d4f91e090"
     ],
     "instructorIds": [
       "instructor-4",

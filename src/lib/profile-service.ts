@@ -11,6 +11,7 @@ interface ProfileData {
   bootcampId: string
   bio?: string
   image?: string | null
+  githubUrl?: string
 }
 
 export async function saveProfile(profileData: ProfileData) {
@@ -29,6 +30,7 @@ export async function saveProfile(profileData: ProfileData) {
       role: profileData.role,
       bio: profileData.bio,
       image: profileData.image || undefined,
+      githubUrl: profileData.githubUrl,
     };
 
     // Add new student to the array
@@ -86,6 +88,7 @@ export async function saveProfile(profileData: ProfileData) {
 - **Location**: ${profileData.location}
 - **Role**: ${profileData.role}
 - **Bootcamp**: ${bootcamps[bootcampIndex].location}
+${profileData.githubUrl ? `- **GitHub**: ${profileData.githubUrl}` : ""}
 
 ${profileData.bio ? `\n### Bio\n${profileData.bio}` : ""}
       `,

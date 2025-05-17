@@ -62,6 +62,7 @@ export default function ProfilePage() {
         bootcampId: formData.get("bootcampId") as string,
         bio: formData.get("bio") as string,
         image: imagePreview,
+        githubUrl: formData.get("githubUrl") as string,
       }
 
       const result = await saveProfile(profileData)
@@ -143,6 +144,18 @@ export default function ProfilePage() {
               <div className="space-y-2">
                 <Label htmlFor="role">Role</Label>
                 <Input id="role" name="role" placeholder="Developer / Student" required />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="githubUrl">GitHub Profile</Label>
+                <Input 
+                  id="githubUrl" 
+                  name="githubUrl" 
+                  placeholder="https://github.com/yourusername"
+                  type="url"
+                  pattern="https://github.com/.*"
+                  title="Please enter a valid GitHub profile URL"
+                />
               </div>
 
               <div className="space-y-2">

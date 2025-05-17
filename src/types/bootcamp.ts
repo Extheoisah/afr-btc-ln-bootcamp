@@ -5,6 +5,7 @@ export interface Student {
   role: string;
   bio?: string;
   image?: string;
+  githubUrl?: string;
 }
 
 export interface Instructor {

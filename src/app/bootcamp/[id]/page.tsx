@@ -104,6 +104,16 @@ export default async function BootcampPage({ params }: BootcampPageProps) {
                           {student.bio}
                         </p>
                       )}
+                      {student.githubUrl && (
+                        <a
+                          href={student.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center text-sm text-primary hover:underline mt-2"
+                        >
+                          GitHub <ExternalLink className="ml-1 h-3 w-3" />
+                        </a>
+                      )}
                     </CardContent>
                   </Card>
                 ))}

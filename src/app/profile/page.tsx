@@ -101,7 +101,7 @@ export default function ProfilePage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center">Update Your Profile</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center">Add Profile</h1>
 
         {pullRequestUrl ? (
           <Card className="mb-8">
@@ -127,7 +127,7 @@ export default function ProfilePage() {
         <Card>
           <CardHeader>
             <CardTitle>Personal Information</CardTitle>
-            <CardDescription>Update your profile information to be displayed on the bootcamp page</CardDescription>
+            <CardDescription>Add your profile information to be displayed on the bootcamp page</CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-6">

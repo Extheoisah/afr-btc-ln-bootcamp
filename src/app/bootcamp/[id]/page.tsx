@@ -26,8 +26,6 @@ export default async function BootcampPage(props: BootcampPageProps) {
     notFound();
   }
 
-  console.log({ students: bootcamp.students });
-
   return (
     <div className="container mx-auto px-4 py-12">
       <Link
@@ -125,7 +123,18 @@ export default async function BootcampPage(props: BootcampPageProps) {
                     </Card>
                   ))
                 ) : (
-                  <p className="text-black">No students</p>
+                  <div className="flex justify-start items-start h-full flex-col gap-2">
+                    <p className="text-black">No students</p>
+                    <p className="text-muted-foreground">
+                      Were you a student?{" "}
+                      <Link
+                        href="/profile"
+                        className="text-primary hover:underline"
+                      >
+                        Add your profile
+                      </Link>
+                    </p>
+                  </div>
                 )}
               </div>
             </TabsContent>
@@ -139,31 +148,31 @@ export default async function BootcampPage(props: BootcampPageProps) {
                       <div className="h-32 w-32 overflow-hidden rounded-full relative mx-auto mt-6">
                         <Image
                           src={
-                          instructor.image ||
-                          `/placeholder.svg?height=200&width=200&text=${instructor.name}`
-                        }
-                        alt={instructor.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardHeader>
-                      <CardTitle>{instructor.name}</CardTitle>
-                      <CardDescription className="flex items-center">
-                        <MapPin className="mr-1 h-3 w-3" />{" "}
-                        {instructor.location}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        {instructor.expertise}
-                      </p>
-                      {instructor.bio && (
-                        <p className="text-sm text-muted-foreground mt-2">
-                          {instructor.bio}
+                            instructor.image ||
+                            `/placeholder.svg?height=200&width=200&text=${instructor.name}`
+                          }
+                          alt={instructor.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <CardHeader>
+                        <CardTitle>{instructor.name}</CardTitle>
+                        <CardDescription className="flex items-center">
+                          <MapPin className="mr-1 h-3 w-3" />{" "}
+                          {instructor.location}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-muted-foreground">
+                          {instructor.expertise}
                         </p>
-                      )}
-                    </CardContent>
+                        {instructor.bio && (
+                          <p className="text-sm text-muted-foreground mt-2">
+                            {instructor.bio}
+                          </p>
+                        )}
+                      </CardContent>
                     </Card>
                   ))
                 ) : (

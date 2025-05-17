@@ -73,7 +73,7 @@ export default async function HomePage() {
         <h2 className="text-2xl font-bold mb-4">Are you a bootcamp student?</h2>
         <p className="mb-6">Update your profile and showcase your projects</p>
         <Link href="/profile">
-          <Button>Update Your Profile</Button>
+          <Button>Add Your Profile</Button>
         </Link>
       </section>
     </div>

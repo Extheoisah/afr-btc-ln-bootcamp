@@ -47,5 +47,13 @@
     "location": "Enugu, Nigeria",
     "role": "Full Stack Developer",
     "image": "/placeholder.svg?height=200&width=200&text=NO"
+  },
+  {
+    "id": "aaa610bc-37fd-4365-b95e-f24e9c4e4cff",
+    "name": "test",
+    "location": "Nairobi, Kenya",
+    "role": "Student",
+    "bio": "I'm a dev",
+    "githubUrl": "https://github.com/extheoisah"
   }
-] 
+]

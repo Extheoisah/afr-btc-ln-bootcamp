@@ -13,10 +13,12 @@ import { getAllBootcampsWithDetails } from "@/lib/data"
 import { saveProfile } from "@/lib/profile-service"
 import { toast } from "sonner"
 import Image from "next/image"
+import { ExternalLink } from "lucide-react"
 
 export default function ProfilePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [pullRequestUrl, setPullRequestUrl] = useState<string | null>(null)
   const bootcamps = getAllBootcampsWithDetails()
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,16 +47,17 @@ export default function ProfilePage() {
         image: imagePreview,
       }
 
-      await saveProfile(profileData)
+      const result = await saveProfile(profileData)
+      setPullRequestUrl(result.pullRequestUrl)
 
-      toast.success("Profile Updated", {
-        description: "Your profile has been successfully updated.",
+      toast.success("Profile Submitted", {
+        description: "A pull request has been created with your profile changes.",
       })
 
-      // Reset form or redirect
+      // Don't reset the form so user can see their submission
     } catch (error) {
       toast.error("Error", {
-        description: "There was a problem updating your profile.",
+        description: "There was a problem submitting your profile.",
       })
       console.error(error)
     } finally {
@@ -66,6 +69,27 @@ export default function ProfilePage() {
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">Update Your Profile</h1>
+
+        {pullRequestUrl ? (
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>Profile Submitted Successfully!</CardTitle>
+              <CardDescription>
+                Your profile changes have been submitted as a pull request. Click below to view and track your submission.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <a
+                href={pullRequestUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-primary hover:underline"
+              >
+                View Pull Request <ExternalLink className="ml-1 h-4 w-4" />
+              </a>
+            </CardContent>
+          </Card>
+        ) : null}
 
         <Card>
           <CardHeader>
@@ -139,8 +163,8 @@ export default function ProfilePage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Updating..." : "Update Profile"}
+              <Button type="submit" className="w-full" disabled={isSubmitting || !!pullRequestUrl}>
+                {isSubmitting ? "Submitting..." : pullRequestUrl ? "Profile Submitted" : "Submit Profile"}
               </Button>
             </CardFooter>
           </form>

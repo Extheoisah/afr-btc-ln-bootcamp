@@ -15,10 +15,10 @@
   },
   {
     "id": "sponsor-3",
-    "name": "Qala Africa",
+    "name": "Btrust",
     "type": "Main Sponsor",
-    "logo": "/placeholder.svg?height=100&width=100&text=QA",
-    "website": "https://qala.dev"
+    "logo": "https://www.btrust.tech/logo.svg",
+    "website": "https://btrust.tech"
   },
   {
     "id": "sponsor-4",

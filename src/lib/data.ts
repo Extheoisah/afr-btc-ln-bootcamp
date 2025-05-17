@@ -36,12 +36,27 @@ export async function getBootcampWithDetails(bootcampId: string): Promise<(Bootc
   const bootcamp = (bootcampsData as Bootcamp[]).find((b) => b.id === bootcampId);
   if (!bootcamp) return null;
 
+  // Ensure studentIds is initialized
+  const studentIds = bootcamp.studentIds || [];
+  const instructorIds = bootcamp.instructorIds || [];
+  const projectIds = bootcamp.projectIds || [];
+  const sponsorIds = bootcamp.sponsorIds || [];
+
   return {
     ...bootcamp,
-    students: bootcamp.studentIds?.map(id => (studentsData as Student[]).find(s => s.id === id)).filter(Boolean) as Student[] || [],
-    instructors: bootcamp.instructorIds?.map(id => (instructorsData as Instructor[]).find(i => i.id === id)).filter(Boolean) as Instructor[] || [],
-    projects: bootcamp.projectIds?.map(id => (projectsData as Project[]).find(p => p.id === id)).filter(Boolean) as Project[] || [],
-    sponsors: bootcamp.sponsorIds?.map(id => (sponsorsData as Sponsor[]).find(s => s.id === id)).filter(Boolean) as Sponsor[] || [],
+    // Ensure we're properly filtering and type casting
+    students: studentIds
+      .map(id => (studentsData as Student[]).find(s => s.id === id))
+      .filter((s): s is Student => s !== undefined),
+    instructors: instructorIds
+      .map(id => (instructorsData as Instructor[]).find(i => i.id === id))
+      .filter((i): i is Instructor => i !== undefined),
+    projects: projectIds
+      .map(id => (projectsData as Project[]).find(p => p.id === id))
+      .filter((p): p is Project => p !== undefined),
+    sponsors: sponsorIds
+      .map(id => (sponsorsData as Sponsor[]).find(s => s.id === id))
+      .filter((s): s is Sponsor => s !== undefined),
   };
 }
 
@@ -51,11 +66,28 @@ export async function getAllBootcampsWithDetails(): Promise<(Bootcamp & {
   projects: Project[];
   sponsors: Sponsor[];
 })[]> {
-  return (bootcampsData as Bootcamp[]).map((bootcamp) => ({
-    ...bootcamp,
-    students: bootcamp.studentIds?.map(id => (studentsData as Student[]).find(s => s.id === id)).filter(Boolean) as Student[] || [],
-    instructors: bootcamp.instructorIds?.map(id => (instructorsData as Instructor[]).find(i => i.id === id)).filter(Boolean) as Instructor[] || [],
-    projects: bootcamp.projectIds?.map(id => (projectsData as Project[]).find(p => p.id === id)).filter(Boolean) as Project[] || [],
-    sponsors: bootcamp.sponsorIds?.map(id => (sponsorsData as Sponsor[]).find(s => s.id === id)).filter(Boolean) as Sponsor[] || [],
-  }));
+  return (bootcampsData as Bootcamp[]).map((bootcamp) => {
+    // Ensure arrays are initialized
+    const studentIds = bootcamp.studentIds || [];
+    const instructorIds = bootcamp.instructorIds || [];
+    const projectIds = bootcamp.projectIds || [];
+    const sponsorIds = bootcamp.sponsorIds || [];
+
+    return {
+      ...bootcamp,
+      // Ensure we're properly filtering and type casting
+      students: studentIds
+        .map(id => (studentsData as Student[]).find(s => s.id === id))
+        .filter((s): s is Student => s !== undefined),
+      instructors: instructorIds
+        .map(id => (instructorsData as Instructor[]).find(i => i.id === id))
+        .filter((i): i is Instructor => i !== undefined),
+      projects: projectIds
+        .map(id => (projectsData as Project[]).find(p => p.id === id))
+        .filter((p): p is Project => p !== undefined),
+      sponsors: sponsorIds
+        .map(id => (sponsorsData as Sponsor[]).find(s => s.id === id))
+        .filter((s): s is Sponsor => s !== undefined),
+    };
+  });
 }

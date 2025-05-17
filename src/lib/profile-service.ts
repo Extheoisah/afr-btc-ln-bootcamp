@@ -2,7 +2,7 @@
 
 import { createPullRequest } from "./github"
 import { getBootcamps, getStudents } from "./data"
-import type { Student } from "@/types/bootcamp"
+import type { Student, Bootcamp } from "@/types/bootcamp"
 
 interface ProfileData {
   name: string
@@ -17,14 +17,19 @@ interface ProfileData {
 export async function saveProfile(profileData: ProfileData) {
   try {
     // Fetch current data
-    const [students, bootcamps] = await Promise.all([
+    const [currentStudents, currentBootcamps] = await Promise.all([
       getStudents(),
       getBootcamps(),
     ]);
 
-    // Create new student object
+    // Create deep copies to avoid mutating the original data
+    const students = JSON.parse(JSON.stringify(currentStudents));
+    const bootcamps = JSON.parse(JSON.stringify(currentBootcamps));
+
+    // Create new student object with UUID
+    const studentId = crypto.randomUUID();
     const newStudent: Student = {
-      id: crypto.randomUUID(),
+      id: studentId,
       name: profileData.name,
       location: profileData.location,
       role: profileData.role,
@@ -33,22 +38,22 @@ export async function saveProfile(profileData: ProfileData) {
       githubUrl: profileData.githubUrl,
     };
 
-    // Add new student to the array
+    // Add new student to the array without removing existing ones
     students.push(newStudent);
 
-    // Find the bootcamp and add student ID
-    const bootcampIndex = bootcamps.findIndex(b => b.id === profileData.bootcampId);
+    // Find the bootcamp
+    const bootcampIndex = bootcamps.findIndex((b: Bootcamp) => b.id === profileData.bootcampId);
     if (bootcampIndex === -1) {
       throw new Error("Bootcamp not found");
     }
 
-    // Initialize students array if it doesn't exist
+    // Initialize studentIds array if it doesn't exist
     if (!bootcamps[bootcampIndex].studentIds) {
       bootcamps[bootcampIndex].studentIds = [];
     }
 
-    // Add student ID to bootcamp
-    bootcamps[bootcampIndex].studentIds.push(newStudent.id);
+    // Add student ID to bootcamp's studentIds array without removing existing ones
+    bootcamps[bootcampIndex].studentIds.push(studentId);
 
     // If there's an image, prepare it for the pull request
     const files = [
@@ -73,14 +78,14 @@ export async function saveProfile(profileData: ProfileData) {
         
         files.push({
           path: `public${imagePath}`,
-          content: matches[2], // Get the base64 content without the prefix
+          content: matches[2], // base64 content
         });
       }
     }
 
-    // Create pull request
+    // Create pull request with both student and bootcamp updates
     const result = await createPullRequest({
-      title: `Add student profile: ${profileData.name}`,
+      title: `Add new student profile: ${profileData.name}`,
       body: `
 ## New Student Profile
 
@@ -91,6 +96,10 @@ export async function saveProfile(profileData: ProfileData) {
 ${profileData.githubUrl ? `- **GitHub**: ${profileData.githubUrl}` : ""}
 
 ${profileData.bio ? `\n### Bio\n${profileData.bio}` : ""}
+
+### Technical Details
+- Student ID: \`${studentId}\`
+- Added to bootcamp: \`${profileData.bootcampId}\`
       `,
       files,
     });

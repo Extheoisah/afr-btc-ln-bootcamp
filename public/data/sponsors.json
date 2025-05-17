@@ -3,28 +3,28 @@
     "id": "sponsor-1",
     "name": "Bitcoin Africa",
     "type": "Main Sponsor",
-    "logo": "/placeholder.svg?height=100&width=100&text=BA",
+    "logo": "/images/sponsor-bitcoiners-africa.webp?height=100&width=100",
     "website": "https://bitcoiners.africa/"
   },
   {
     "id": "sponsor-2",
     "name": "Africa Free Routing",
     "type": "Technical Partner",
-    "logo": "/placeholder.svg?height=100&width=100&text=LL",
+    "logo": "/images/sponsor-free-routing.webp?height=100&width=100",
     "website": "https://freerouting.africa/"
   },
   {
     "id": "sponsor-3",
     "name": "Btrust",
     "type": "Main Sponsor",
-    "logo": "/images/sponsor-btrust.png",
+    "logo": "/images/sponsor-btrust.png?height=100&width=100",
     "website": "https://btrust.tech"
   },
   {
     "id": "sponsor-4",
     "name": "Mavapay",
     "type": "Technical Partner",
-    "logo": "/placeholder.svg?height=100&width=100&text=ST",
+    "logo": "/images/sponsor-mavapay2.png?height=100&width=100",
     "website": "https://mavapay.co"
   }
 ] 

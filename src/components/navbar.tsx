@@ -20,7 +20,8 @@ export default function Navbar() {
     { href: "/bootcamps", label: "Bootcamps" },
     { href: "/instructors", label: "Instructors" },
     { href: "/sponsors", label: "Sponsors" },
-    { href: "/profile", label: "Update Profile" },
+    { href: "/projects", label: "Projects" },
+    { href: "/profile", label: "Add Profile" },
   ];
 
   return (
@@ -29,7 +30,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
             <Bitcoin className="h-6 w-6 text-amber-500" />
-            <span className="font-bold text-lg">Bitcoin Bootcamp</span>
+            <span className="font-bold text-lg">AFR Bitcoin Bootcamp</span>
           </Link>
 
           {/* Desktop Navigation */}

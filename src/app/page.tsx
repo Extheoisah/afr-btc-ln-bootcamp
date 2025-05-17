@@ -69,6 +69,19 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="mb-12 text-center">
+        <h2 className="text-2xl font-bold mb-4">Bitcoin Projects</h2>
+        <p className="mb-6">Explore projects built during our bootcamps or submit your own</p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Link href="/projects">
+            <Button>View Projects</Button>
+          </Link>
+          <Link href="/projects/submit">
+            <Button variant="outline">Submit Your Project</Button>
+          </Link>
+        </div>
+      </section>
+
       <section className="text-center">
         <h2 className="text-2xl font-bold mb-4">Are you a bootcamp student?</h2>
         <p className="mb-6">Update your profile and showcase your projects</p>

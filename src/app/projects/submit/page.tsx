@@ -22,13 +22,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getAllBootcampsWithDetails } from "@/lib/data";
-import { saveProfile } from "@/lib/profile-service";
 import { toast } from "sonner";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import type { Bootcamp } from "@/types/bootcamp";
+import { submitProject } from "../../../lib/project-service";
 
-export default function ProfilePage() {
+export default function SubmitProjectPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [pullRequestUrl, setPullRequestUrl] = useState<string | null>(null);
@@ -85,28 +85,27 @@ export default function ProfilePage() {
 
     try {
       const formData = new FormData(e.currentTarget);
-      const profileData = {
+      const projectData = {
         name: formData.get("name") as string,
-        location: formData.get("location") as string,
-        role: formData.get("role") as string,
+        description: formData.get("description") as string,
         bootcampId: formData.get("bootcampId") as string,
-        bio: formData.get("bio") as string,
-        image: imagePreview,
         githubUrl: formData.get("githubUrl") as string,
+        demoUrl: formData.get("demoUrl") as string,
+        image: imagePreview,
       };
 
-      const result = await saveProfile(profileData);
+      const result = await submitProject(projectData);
       setPullRequestUrl(result.pullRequestUrl);
 
-      toast.success("Profile Submitted", {
+      toast.success("Project Submitted", {
         description:
-          "A pull request has been created with your profile changes.",
+          "A pull request has been created with your project submission.",
       });
 
       // Don't reset the form so user can see their submission
     } catch (error) {
       toast.error("Error", {
-        description: "There was a problem submitting your profile.",
+        description: "There was a problem submitting your project.",
       });
       console.error(error);
     } finally {
@@ -134,15 +133,17 @@ export default function ProfilePage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center">Add Profile</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center">
+          Submit Your Project
+        </h1>
 
         {pullRequestUrl ? (
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Profile Submitted Successfully!</CardTitle>
+              <CardTitle>Project Submitted Successfully!</CardTitle>
               <CardDescription>
-                Your profile changes have been submitted as a pull request.
-                Click below to view and track your submission.
+                Your project has been submitted as a pull request. Click below
+                to view and track your submission.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -160,52 +161,59 @@ export default function ProfilePage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Personal Information</CardTitle>
+            <CardTitle>Project Information</CardTitle>
             <CardDescription>
-              Add your profile information to be displayed on the bootcamp page
+              Submit your Bitcoin project to be featured on the bootcamp page
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input id="name" name="name" placeholder="John Doe" required />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="location">Location</Label>
+                <Label htmlFor="name">Project Name</Label>
                 <Input
-                  id="location"
-                  name="location"
-                  placeholder="Nairobi, Kenya"
+                  id="name"
+                  name="name"
+                  placeholder="My Lightning Project"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="role">Role</Label>
-                <Input
-                  id="role"
-                  name="role"
-                  placeholder="Developer / Student"
+                <Label htmlFor="description">Project Description</Label>
+                <Textarea
+                  id="description"
+                  name="description"
+                  placeholder="Describe your project and what problems it solves"
+                  rows={4}
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="githubUrl">GitHub Profile</Label>
+                <Label htmlFor="githubUrl">GitHub Repository</Label>
                 <Input
                   id="githubUrl"
                   name="githubUrl"
-                  placeholder="https://github.com/yourusername"
+                  placeholder="https://github.com/username/repo"
                   type="url"
                   pattern="https://github.com/.*"
-                  title="Please enter a valid GitHub profile URL"
+                  title="Please enter a valid GitHub repository URL"
+                  required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="bootcampId">Bootcamp Attended</Label>
+                <Label htmlFor="demoUrl">Demo URL (Optional)</Label>
+                <Input
+                  id="demoUrl"
+                  name="demoUrl"
+                  placeholder="https://myproject.com"
+                  type="url"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="bootcampId">Related Bootcamp</Label>
                 <Select name="bootcampId" required>
                   <SelectTrigger>
                     <SelectValue placeholder="Select bootcamp" />
@@ -225,17 +233,7 @@ export default function ProfilePage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="bio">Bio</Label>
-                <Textarea
-                  id="bio"
-                  name="bio"
-                  placeholder="Tell us about yourself and your experience with Bitcoin"
-                  rows={4}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="image">Profile Image</Label>
+                <Label htmlFor="image">Project Screenshot (Optional)</Label>
                 <p className="text-xs text-muted-foreground mt-1">
                   Maximum file size: 1MB
                 </p>
@@ -266,14 +264,14 @@ export default function ProfilePage() {
                       <div className="absolute inset-0">
                         <Image
                           src={imagePreview}
-                          alt="Profile preview"
+                          alt="Project screenshot preview"
                           fill
                           className="object-contain"
                         />
                       </div>
                     ) : (
                       <span className="text-muted-foreground">
-                        Image preview
+                        Screenshot preview
                       </span>
                     )}
                   </div>
@@ -289,8 +287,8 @@ export default function ProfilePage() {
                 {isSubmitting
                   ? "Submitting..."
                   : pullRequestUrl
-                  ? "Profile Submitted"
-                  : "Submit Profile"}
+                  ? "Project Submitted"
+                  : "Submit Project"}
               </Button>
             </CardFooter>
           </form>

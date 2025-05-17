@@ -21,7 +21,7 @@ export default async function HomePage() {
         <div className="flex justify-center mb-4">
           <Bitcoin className="h-12 w-12 text-amber-500" />
         </div>
-        <h1 className="text-4xl font-bold mb-4">Bitcoin Lightning Bootcamp</h1>
+        <h1 className="text-4xl font-bold mb-4">Africa Bitcoin Lightning Bootcamp</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Training the next generation of Bitcoin developers across Africa
         </p>

@@ -1,37 +1,38 @@
 [
   {
     "id": "instructor-1",
-    "name": "David Ngugi",
-    "location": "Nairobi, Kenya",
-    "expertise": "Lightning Network",
-    "image": "/placeholder.svg?height=200&width=200&text=DN"
+    "name": "Theophilus Isah",
+    "location": "Lagos, Nigeria",
+    "expertise": "Bitcoin & Lightning Network",
+    "image": "/images/instructor-theophilus.jpg?height=200&width=200",
+    "twitter": "https://x.com/extheo",
+    "linkedin": "https://www.linkedin.com/in/theophilusisah/",
+    "github": "https://github.com/extheoisah",
+    "company": "Mavapay",
+    "bio": "Theophilus Isah is a software engineer and the CEO and co-founder of Mavapay."
   },
   {
     "id": "instructor-2",
-    "name": "Sarah Johnson",
-    "location": "Cape Town, South Africa",
-    "expertise": "Bitcoin Protocol",
-    "image": "/placeholder.svg?height=200&width=200&text=SJ"
+    "name": "Oluwatobi Bamidele",
+    "location": "Lagos, Nigeria",
+    "expertise": "Bitcoin & Lightning Network",
+    "image": "/images/instructor-tobi.jpg?height=200&width=200",
+    "twitter": "https://x.com/tobi_bams",
+    "linkedin": "https://www.linkedin.com/in/oluwatobi-bamidele-pius/",
+    "github": "https://github.com/tobi-bams",
+    "company": "Mavapay",
+    "bio": "Oluwatobi Bamidele is a software engineer and the CTO and co-founder of Mavapay."
   },
   {
     "id": "instructor-3",
-    "name": "Michael Oluwafemi",
-    "location": "Lagos, Nigeria",
-    "expertise": "Bitcoin Applications",
-    "image": "/placeholder.svg?height=200&width=200&text=MO"
-  },
-  {
-    "id": "instructor-4",
-    "name": "James Wainaina",
+    "name": "Simon",
     "location": "Nairobi, Kenya",
-    "expertise": "Lightning Network",
-    "image": "/placeholder.svg?height=200&width=200&text=JW"
-  },
-  {
-    "id": "instructor-5",
-    "name": "Priscilla Mensah",
-    "location": "Accra, Ghana",
-    "expertise": "Bitcoin Protocol",
-    "image": "/placeholder.svg?height=200&width=200&text=PM"
+    "expertise": "Bitcoin & Lightning Network",
+    "image": "",
+    "twitter": "",
+    "linkedin": "",
+    "github": "",
+    "company": "OpenSource",
+    "bio": "Simon is a software engineer and an open source contributor."
   }
 ] 

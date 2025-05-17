@@ -15,6 +15,10 @@ export interface Instructor {
   expertise: string;
   bio?: string;
   image?: string;
+  twitter?: string;
+  linkedin?: string;
+  github?: string;
+  company?: string;
 }
 
 export interface Project {

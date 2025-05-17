@@ -1,22 +1,16 @@
 [
   {
-    "id": "nairobi-2023",
+    "id": "nairobi-2024",
     "location": "Nairobi, Kenya",
-    "date": "2023-06-15",
-    "description": "A two-week intensive bootcamp focused on Bitcoin Lightning Network development, held at the iHub in Nairobi.",
+    "date": "2024-06-15",
+    "description": "A four-days intensive bootcamp focused on Bitcoin Lightning Network development, held at the iHub in Nairobi.",
     "image": "/images/nairobi-national-park.jpg",
     "studentIds": [
-      "student-1",
-      "student-2",
-      "student-3"
     ],
     "instructorIds": [
-      "instructor-1",
-      "instructor-2"
+      "instructor-3"
     ],
     "projectIds": [
-      "project-1",
-      "project-2"
     ],
     "sponsorIds": [
       "sponsor-1",
@@ -24,47 +18,44 @@
     ]
   },
   {
-    "id": "lagos-2023",
-    "location": "Lagos, Nigeria",
-    "date": "2023-09-10",
-    "description": "A three-week bootcamp covering Bitcoin fundamentals and Lightning Network application development in Lagos.",
-    "image": "/images/lagos-nigeria.webp",
+    "id": "kaduna-2025",
+    "location": "Kaduna, Nigeria",
+    "date": "2025-05-17",
+    "description": "A four-days intensive bootcamp focused on Bitcoin Lightning Network development, held at the Nexus Hub in Kaduna.",
+    "image": "/images/kaduna-nigeria.webp",
     "studentIds": [
-      "student-4",
-      "student-5",
-      "7a1af429-02a2-4288-a9a7-c5127ecf8cfd"
     ],
     "instructorIds": [
-      "instructor-3"
+      "instructor-1",
+      "instructor-2"
     ],
     "projectIds": [
-      "project-3"
     ],
     "sponsorIds": [
-      "sponsor-3"
+      "sponsor-1",
+      "sponsor-2",
+      "sponsor-3",
+      "sponsor-4"
     ]
   },
   {
-    "id": "accra-2024",
+    "id": "accra-2025",
     "location": "Accra, Ghana",
-    "date": "2024-02-20",
-    "description": "A month-long bootcamp focused on building Bitcoin applications and Lightning Network integration in Accra.",
+    "date": "2025-05-17",
+    "description": "A four-days intensive bootcamp focused on Bitcoin Lightning Network development, held at the YOTA building, La Bawaleshie Road, East Legon, in Accra.",
     "image": "/images/accra-ghana.avif",
     "studentIds": [
-      "student-6",
-      "student-7"
     ],
     "instructorIds": [
-      "instructor-4",
-      "instructor-5"
+      "instructor-1"
     ],
     "projectIds": [
-      "project-4",
-      "project-5"
     ],
     "sponsorIds": [
-      "sponsor-4",
-      "sponsor-5"
+      "sponsor-1",
+      "sponsor-2",
+      "sponsor-3",
+      "sponsor-4"
     ]
   }
 ]

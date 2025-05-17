@@ -26,9 +26,14 @@ export default async function BootcampPage(props: BootcampPageProps) {
     notFound();
   }
 
+  console.log({ students: bootcamp.students });
+
   return (
     <div className="container mx-auto px-4 py-12">
-      <Link href="/bootcamps" className="flex items-center mb-6 text-sm hover:underline">
+      <Link
+        href="/bootcamps"
+        className="flex items-center mb-6 text-sm hover:underline"
+      >
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to all bootcamps
       </Link>
@@ -77,58 +82,63 @@ export default async function BootcampPage(props: BootcampPageProps) {
             <TabsContent value="students" className="space-y-6">
               <h2 className="text-2xl font-bold mb-4">Students</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {bootcamp.students.map((student) => (
-                  <Card key={student.id}>
-                    <div className="h-32 w-32 overflow-hidden rounded-full relative mx-auto mt-6">
-                      <Image
-                        src={
-                          student.image ||
-                          `/placeholder.svg?height=200&width=200&text=${student.name}`
-                        }
-                        alt={student.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardHeader>
-                      <CardTitle>{student.name}</CardTitle>
-                      <CardDescription className="flex items-center">
-                        <MapPin className="mr-1 h-3 w-3" /> {student.location}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        {student.role}
-                      </p>
-                      {student.bio && (
-                        <p className="text-sm text-muted-foreground mt-2">
-                          {student.bio}
+                {bootcamp.students.length > 0 ? (
+                  bootcamp.students.map((student) => (
+                    <Card key={student.id}>
+                      <div className="h-32 w-32 overflow-hidden rounded-full relative mx-auto mt-6">
+                        <Image
+                          src={
+                            student.image ||
+                            `/placeholder.svg?height=200&width=200&text=${student.name}`
+                          }
+                          alt={student.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <CardHeader>
+                        <CardTitle>{student.name}</CardTitle>
+                        <CardDescription className="flex items-center">
+                          <MapPin className="mr-1 h-3 w-3" /> {student.location}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-muted-foreground">
+                          {student.role}
                         </p>
-                      )}
-                      {student.githubUrl && (
-                        <a
-                          href={student.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center text-sm text-primary hover:underline mt-2"
-                        >
-                          GitHub <ExternalLink className="ml-1 h-3 w-3" />
-                        </a>
-                      )}
-                    </CardContent>
-                  </Card>
-                ))}
+                        {student.bio && (
+                          <p className="text-sm text-muted-foreground mt-2">
+                            {student.bio}
+                          </p>
+                        )}
+                        {student.githubUrl && (
+                          <a
+                            href={student.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center text-sm text-primary hover:underline mt-2"
+                          >
+                            GitHub <ExternalLink className="ml-1 h-3 w-3" />
+                          </a>
+                        )}
+                      </CardContent>
+                    </Card>
+                  ))
+                ) : (
+                  <p className="text-black">No students</p>
+                )}
               </div>
             </TabsContent>
 
             <TabsContent value="instructors" className="space-y-6">
               <h2 className="text-2xl font-bold mb-4">Instructors</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {bootcamp.instructors.map((instructor) => (
-                  <Card key={instructor.id}>
-                    <div className="h-32 w-32 overflow-hidden rounded-full relative mx-auto mt-6">
-                      <Image
-                        src={
+                {bootcamp.instructors.length > 0 ? (
+                  bootcamp.instructors.map((instructor) => (
+                    <Card key={instructor.id}>
+                      <div className="h-32 w-32 overflow-hidden rounded-full relative mx-auto mt-6">
+                        <Image
+                          src={
                           instructor.image ||
                           `/placeholder.svg?height=200&width=200&text=${instructor.name}`
                         }
@@ -140,7 +150,8 @@ export default async function BootcampPage(props: BootcampPageProps) {
                     <CardHeader>
                       <CardTitle>{instructor.name}</CardTitle>
                       <CardDescription className="flex items-center">
-                        <MapPin className="mr-1 h-3 w-3" /> {instructor.location}
+                        <MapPin className="mr-1 h-3 w-3" />{" "}
+                        {instructor.location}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -153,46 +164,53 @@ export default async function BootcampPage(props: BootcampPageProps) {
                         </p>
                       )}
                     </CardContent>
-                  </Card>
-                ))}
+                    </Card>
+                  ))
+                ) : (
+                  <p className="text-black">No instructors</p>
+                )}
               </div>
             </TabsContent>
 
             <TabsContent value="projects" className="space-y-6">
               <h2 className="text-2xl font-bold mb-4">Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {bootcamp.projects.map((project) => (
-                  <Card key={project.id}>
-                    <CardHeader>
-                      <CardTitle>{project.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p>{project.description}</p>
-                      <div className="flex gap-4 mt-4">
-                        {project.githubUrl && (
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center text-sm text-primary hover:underline"
-                          >
-                            GitHub <ExternalLink className="ml-1 h-3 w-3" />
-                          </a>
-                        )}
-                        {project.demoUrl && (
-                          <a
-                            href={project.demoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center text-sm text-primary hover:underline"
-                          >
-                            Demo <ExternalLink className="ml-1 h-3 w-3" />
-                          </a>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                {bootcamp.projects.length > 0 ? (
+                  bootcamp.projects.map((project) => (
+                    <Card key={project.id}>
+                      <CardHeader>
+                        <CardTitle>{project.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>{project.description}</p>
+                        <div className="flex gap-4 mt-4">
+                          {project.githubUrl && (
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center text-sm text-primary hover:underline"
+                            >
+                              GitHub <ExternalLink className="ml-1 h-3 w-3" />
+                            </a>
+                          )}
+                          {project.demoUrl && (
+                            <a
+                              href={project.demoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center text-sm text-primary hover:underline"
+                            >
+                              Demo <ExternalLink className="ml-1 h-3 w-3" />
+                            </a>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))
+                ) : (
+                  <p className="text-black">No projects</p>
+                )}
               </div>
             </TabsContent>
           </Tabs>
@@ -204,37 +222,41 @@ export default async function BootcampPage(props: BootcampPageProps) {
               <CardTitle>Bootcamp Sponsors</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {bootcamp.sponsors.map((sponsor) => (
-                <div key={sponsor.id} className="flex items-center space-x-4">
-                  <div className="h-12 w-12 overflow-hidden rounded relative">
-                    <Image
-                      src={
-                        sponsor.logo ||
-                        `/placeholder.svg?height=50&width=50&text=${sponsor.name}`
-                      }
-                      alt={sponsor.name}
-                      fill
-                      className="object-contain"
-                    />
+              {bootcamp.sponsors.length > 0 ? (
+                bootcamp.sponsors.map((sponsor) => (
+                  <div key={sponsor.id} className="flex items-center space-x-4">
+                    <div className="h-12 w-12 overflow-hidden rounded relative">
+                      <Image
+                        src={
+                          sponsor.logo ||
+                          `/placeholder.svg?height=50&width=50&text=${sponsor.name}`
+                        }
+                        alt={sponsor.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-medium">{sponsor.name}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {sponsor.type}
+                      </p>
+                      {sponsor.website && (
+                        <a
+                          href={sponsor.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-primary hover:underline flex items-center mt-1"
+                        >
+                          Website <ExternalLink className="ml-1 h-3 w-3" />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-medium">{sponsor.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {sponsor.type}
-                    </p>
-                    {sponsor.website && (
-                      <a
-                        href={sponsor.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-primary hover:underline flex items-center mt-1"
-                      >
-                        Website <ExternalLink className="ml-1 h-3 w-3" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-black">No sponsors</p>
+              )}
             </CardContent>
           </Card>
         </div>

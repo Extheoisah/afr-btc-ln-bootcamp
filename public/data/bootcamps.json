@@ -9,8 +9,7 @@
     "instructorIds": [
       "instructor-3"
     ],
-    "projectIds": [
-    ],
+    "projectIds": [],
     "sponsorIds": [
       "sponsor-1",
       "sponsor-2"
@@ -22,13 +21,14 @@
     "date": "2025-05-17",
     "description": "A four-days intensive bootcamp focused on Bitcoin Lightning Network development, held at the Nexus Hub in Kaduna.",
     "image": "/images/kaduna-nigeria.webp",
-    "studentIds": [],
+    "studentIds": [
+      "e575e2ec-7ce5-44a2-ab5b-ce5721bf01c4"
+    ],
     "instructorIds": [
       "instructor-1",
       "instructor-2"
     ],
-    "projectIds": [
-    ],
+    "projectIds": [],
     "sponsorIds": [
       "sponsor-1",
       "sponsor-2",

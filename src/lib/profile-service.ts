@@ -83,6 +83,7 @@ export async function saveProfile(profileData: ProfileData) {
     // Create pull request with both student and bootcamp updates
     const result = await createPullRequest({
       title: `Add new student profile: ${profileData.name}`,
+      name: profileData.name,
       body: `
 ## New Student Profile
 

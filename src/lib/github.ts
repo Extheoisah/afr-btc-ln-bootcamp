@@ -20,6 +20,7 @@ const BASE_BRANCH = "main";
 
 interface CreatePullRequestParams {
   title: string;
+  name?: string;
   body: string;
   files: {
     path: string;
@@ -32,7 +33,7 @@ interface GitHubError {
   message: string;
 }
 
-export async function createPullRequest({ title, body, files }: CreatePullRequestParams) {
+export async function createPullRequest({ title, name, body, files }: CreatePullRequestParams) {
   try {
     console.log(`Creating pull request for ${files.length} files in ${REPO_OWNER}/${REPO_NAME}`);
 
@@ -46,7 +47,7 @@ export async function createPullRequest({ title, body, files }: CreatePullReques
     console.log(`Latest commit SHA: ${latestCommitSha}`);
 
     // Create a new branch
-    const branchName = `update-${Date.now()}`;
+    const branchName = `update-${title}-${name}-${Date.now()}`;
     await octokit.git.createRef({
       owner: REPO_OWNER,
       repo: REPO_NAME,

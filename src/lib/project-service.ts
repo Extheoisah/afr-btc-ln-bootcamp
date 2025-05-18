@@ -82,6 +82,7 @@ export async function submitProject(projectData: ProjectData) {
     // Create pull request with both project and bootcamp updates
     const result = await createPullRequest({
       title: `Add new project: ${projectData.name}`,
+      name: projectData.name,
       body: `
 ## New Project Submission
 

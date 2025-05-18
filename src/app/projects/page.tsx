@@ -35,7 +35,7 @@ export default async function ProjectsPage() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-3xl font-bold">Projects</h1>
         <Link href="/projects/submit">
-          <Button>Submit Your Project</Button>
+          <Button className="cursor-pointer">Submit Your Project</Button>
         </Link>
       </div>
 
@@ -46,7 +46,9 @@ export default async function ProjectsPage() {
             Be the first to submit a Bitcoin Lightning project from one of our bootcamps!
           </p>
           <Link href="/projects/submit">
-            <Button size="lg">Submit Your Project</Button>
+            <Button className="cursor-pointer" size="lg">
+              Submit Your Project
+            </Button>
           </Link>
         </div>
       ) : (

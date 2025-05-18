@@ -240,7 +240,7 @@ export default function ProfilePage() {
                         variant="destructive"
                         size="sm"
                         onClick={handleDeleteImage}
-                        className="whitespace-nowrap"
+                        className="cursor-pointer whitespace-nowrap"
                       >
                         Delete
                       </Button>

@@ -69,7 +69,7 @@ export default async function HomePage() {
               </CardContent>
               <CardFooter>
                 <Link href={`/bootcamp/${bootcamp.id}`} className="w-full">
-                  <Button variant="default" className="w-full">
+                  <Button variant="default" className="w-full cursor-pointer">
                     View Details
                   </Button>
                 </Link>
@@ -84,10 +84,12 @@ export default async function HomePage() {
         <p className="mb-6">Explore projects built during our bootcamps or submit your own</p>
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
           <Link href="/projects">
-            <Button>View Projects</Button>
+            <Button className="cursor-pointer">View Projects</Button>
           </Link>
           <Link href="/projects/submit">
-            <Button variant="outline">Submit Your Project</Button>
+            <Button variant="outline" className="cursor-pointer">
+              Submit Your Project
+            </Button>
           </Link>
         </div>
       </section>
@@ -96,7 +98,7 @@ export default async function HomePage() {
         <h2 className="mb-4 text-2xl font-bold">Are you a bootcamp student?</h2>
         <p className="mb-6">Update your profile and showcase your projects</p>
         <Link href="/profile">
-          <Button>Add Your Profile</Button>
+          <Button className="cursor-pointer">Add Your Profile</Button>
         </Link>
       </section>
     </div>

@@ -59,7 +59,7 @@ export default async function BootcampsPage() {
             </CardContent>
             <CardFooter>
               <Link href={`/bootcamp/${bootcamp.id}`} className="w-full">
-                <Button variant="default" className="w-full">
+                <Button variant="default" className="w-full cursor-pointer">
                   View Details
                 </Button>
               </Link>

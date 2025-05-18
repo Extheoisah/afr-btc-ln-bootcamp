@@ -75,7 +75,7 @@ export default async function BootcampPage(props: BootcampPageProps) {
                         <Image
                           src={
                             student.image ||
-                            `/placeholder.svg?height=200&width=200&text=${student.name}`
+                            `/images/person-placeholder.webp?height=200&width=200&text=${student.name}`
                           }
                           alt={student.name}
                           fill

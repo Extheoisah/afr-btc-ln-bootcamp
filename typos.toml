@@ -1,0 +1,35 @@
+[default]
+extend-ignore-re = [
+  # Ignore URLs
+  "https?://[^\\s]*",
+  # Ignore email addresses
+  "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+",
+  # Ignore code patterns
+  "`[^`]*`",
+  # Ignore filenames with json, css, scss and markdown extensions
+  "\\w+\\.(json|css|scss|mdx?|toml)",
+]
+
+[default.extend-words]
+# Bitcoin-specific terms to not flag as typos
+LND = "LND"
+sats = "sats"
+satoshis = "satoshis"
+LNURL = "LNURL"
+lightningaddress = "lightningaddress"
+
+[files]
+extend-exclude = [
+  "node_modules/",
+  ".next/",
+  "build/",
+  "dist/",
+  "out/",
+  "public/data/*.json",
+  "*.lock",
+  "package-lock.json",
+  "*.svg",
+  "*.min.js",
+  # Binary files
+  "*.jpg", "*.jpeg", "*.png", "*.gif", "*.webp", "*.avif", "*.ico", "*.pdf"
+] 

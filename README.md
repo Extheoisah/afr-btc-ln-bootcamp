@@ -74,6 +74,51 @@ The application will be available at [http://localhost:3000](http://localhost:30
 │   └── types/                  # TypeScript type definitions
 ```
 
+## Development
+
+### Code Formatting
+
+This project uses Prettier for code formatting. To format your code:
+
+```bash
+# Format all files
+npm run format
+
+# Check formatting without changing files
+npm run format:check
+```
+
+### Spell Checking
+
+We use `typos` for spell checking. To install:
+
+```bash
+# Install typos CLI (macOS/Linux)
+brew install typos-cli
+
+# Or with cargo
+cargo install typos-cli
+```
+
+Then run:
+
+```bash
+# Check for spelling errors
+typos
+
+# Fix spelling errors automatically
+typos --write-changes
+```
+
+### CI/CD
+
+This project uses GitHub Actions for continuous integration:
+
+- **Code Quality**: Automatically checks code formatting with Prettier and linting with ESLint
+- **Spell Check**: Validates spelling across the codebase using typos-cli
+
+These checks run automatically on pull requests and pushes to the main branch.
+
 ## Contributing
 
 ### Data Structure
@@ -100,12 +145,14 @@ These will create Pull Requests that can be reviewed and merged.
 If you have ideas for improving this project or have found issues, we welcome your contributions:
 
 1. **Reporting Issues**:
+
    - Open an issue on GitHub with a clear description
    - Include steps to reproduce the bug
    - Add screenshots if applicable
    - Mention your environment (browser, OS, etc.)
 
 2. **Proposing Features**:
+
    - Open an issue with the tag "enhancement"
    - Describe the feature and its benefits
    - Include mockups or examples if possible

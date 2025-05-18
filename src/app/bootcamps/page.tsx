@@ -18,14 +18,17 @@ export default async function BootcampsPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-8">All Bootcamps</h1>
+      <h1 className="mb-8 text-3xl font-bold">All Bootcamps</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {bootcamps.map((bootcamp: Bootcamp) => (
           <Card key={bootcamp.id} className="flex flex-col">
-            <div className="h-48 overflow-hidden relative">
+            <div className="relative h-48 overflow-hidden">
               <Image
-                src={bootcamp.image || `/placeholder.svg?height=200&width=400&text=${bootcamp.location}`}
+                src={
+                  bootcamp.image ||
+                  `/placeholder.svg?height=200&width=400&text=${bootcamp.location}`
+                }
                 alt={`${bootcamp.location} Bootcamp`}
                 fill
                 className="object-cover"

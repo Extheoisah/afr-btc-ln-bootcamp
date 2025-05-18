@@ -1,26 +1,23 @@
-"use server"
+"use server";
 
-import { createPullRequest } from "./github"
-import { getBootcamps, getStudents } from "./data"
-import type { Student, Bootcamp } from "@/types/bootcamp"
+import { createPullRequest } from "./github";
+import { getBootcamps, getStudents } from "./data";
+import type { Student, Bootcamp } from "@/types/bootcamp";
 
 interface ProfileData {
-  name: string
-  location: string
-  role: string
-  bootcampId: string
-  bio?: string
-  image?: string | null
-  githubUrl?: string
+  name: string;
+  location: string;
+  role: string;
+  bootcampId: string;
+  bio?: string;
+  image?: string | null;
+  githubUrl?: string;
 }
 
 export async function saveProfile(profileData: ProfileData) {
   try {
     // Fetch current data
-    const [currentStudents, currentBootcamps] = await Promise.all([
-      getStudents(),
-      getBootcamps(),
-    ]);
+    const [currentStudents, currentBootcamps] = await Promise.all([getStudents(), getBootcamps()]);
 
     // Create deep copies to avoid mutating the original data
     const students = JSON.parse(JSON.stringify(currentStudents));
@@ -75,7 +72,7 @@ export async function saveProfile(profileData: ProfileData) {
         const fileName = `${imageId}.${imageType}`;
         const imagePath = `/uploads/${fileName}`;
         newStudent.image = imagePath;
-        
+
         files.push({
           path: `public${imagePath}`,
           content: matches[2], // base64 content

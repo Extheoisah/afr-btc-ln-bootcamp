@@ -1,12 +1,12 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { getAllBootcampsWithDetails } from "@/lib/data"
-import { GithubIcon, LinkedinIcon, MapPin, TwitterIcon } from "lucide-react"
-import Image from "next/image"
-import type { Instructor } from "@/types/bootcamp"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAllBootcampsWithDetails } from "@/lib/data";
+import { GithubIcon, LinkedinIcon, MapPin, TwitterIcon } from "lucide-react";
+import Image from "next/image";
+import type { Instructor } from "@/types/bootcamp";
 
 export default async function InstructorsPage() {
-  const bootcamps = await getAllBootcampsWithDetails()
-  
+  const bootcamps = await getAllBootcampsWithDetails();
+
   // Collect all instructors from all bootcamps
   const allInstructors = bootcamps.flatMap((bootcamp) =>
     (bootcamp.instructors || []).map((instructor) => ({
@@ -14,23 +14,26 @@ export default async function InstructorsPage() {
       bootcampLocation: bootcamp.location,
       bootcampId: bootcamp.id,
     }))
-  )
+  );
 
   // Remove duplicates (instructors who taught at multiple bootcamps)
   const uniqueInstructors = Array.from(
     new Map(allInstructors.map((instructor) => [instructor.id, instructor])).values()
-  ) as (Instructor & { bootcampLocation: string; bootcampId: string })[]
+  ) as (Instructor & { bootcampLocation: string; bootcampId: string })[];
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-8">Our Instructors</h1>
+      <h1 className="mb-8 text-3xl font-bold">Our Instructors</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {uniqueInstructors.map((instructor) => (
           <Card key={instructor.id}>
-            <div className="h-48 w-48 overflow-hidden relative rounded-full mx-auto mt-6 border-4 border-primary/20 shadow-md">
+            <div className="border-primary/20 relative mx-auto mt-6 h-48 w-48 overflow-hidden rounded-full border-4 shadow-md">
               <Image
-                src={instructor.image || `/images/person-placeholder.webp?height=200&width=200&text=${instructor.name}`}
+                src={
+                  instructor.image ||
+                  `/images/person-placeholder.webp?height=200&width=200&text=${instructor.name}`
+                }
                 alt={instructor.name}
                 fill
                 className="object-cover"
@@ -44,9 +47,15 @@ export default async function InstructorsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="font-medium mb-2"><span className="text-muted-foreground">Expertise:</span> {instructor.expertise}</p>
-              <p className="font-medium mb-2"><span className="text-muted-foreground">Company:</span> {instructor.company}</p>
-              {instructor.bio && <p className="text-sm text-muted-foreground mb-4">{instructor.bio}</p>}
+              <p className="mb-2 font-medium">
+                <span className="text-muted-foreground">Expertise:</span> {instructor.expertise}
+              </p>
+              <p className="mb-2 font-medium">
+                <span className="text-muted-foreground">Company:</span> {instructor.company}
+              </p>
+              {instructor.bio && (
+                <p className="text-muted-foreground mb-4 text-sm">{instructor.bio}</p>
+              )}
               <div className="flex gap-2">
                 {instructor.twitter && (
                   <a href={instructor.twitter} target="_blank" rel="noopener noreferrer">
@@ -69,5 +78,5 @@ export default async function InstructorsPage() {
         ))}
       </div>
     </div>
-  )
+  );
 }

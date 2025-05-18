@@ -99,8 +99,7 @@ export default function ProfilePage() {
       setPullRequestUrl(result.pullRequestUrl);
 
       toast.success("Profile Submitted", {
-        description:
-          "A pull request has been created with your profile changes.",
+        description: "A pull request has been created with your profile changes.",
       });
 
       // Don't reset the form so user can see their submission
@@ -117,13 +116,11 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-12">
-        <div className="max-w-2xl mx-auto">
+        <div className="mx-auto max-w-2xl">
           <Card>
             <CardHeader>
               <CardTitle>Loading...</CardTitle>
-              <CardDescription>
-                Please wait while we load the bootcamp data.
-              </CardDescription>
+              <CardDescription>Please wait while we load the bootcamp data.</CardDescription>
             </CardHeader>
           </Card>
         </div>
@@ -133,16 +130,16 @@ export default function ProfilePage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center">Add Profile</h1>
+      <div className="mx-auto max-w-2xl">
+        <h1 className="mb-8 text-center text-3xl font-bold">Add Profile</h1>
 
         {pullRequestUrl ? (
           <Card className="mb-8">
             <CardHeader>
               <CardTitle>Profile Submitted Successfully!</CardTitle>
               <CardDescription>
-                Your profile changes have been submitted as a pull request.
-                Click below to view and track your submission.
+                Your profile changes have been submitted as a pull request. Click below to view and
+                track your submission.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -150,7 +147,7 @@ export default function ProfilePage() {
                 href={pullRequestUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-primary hover:underline"
+                className="text-primary inline-flex items-center hover:underline"
               >
                 View Pull Request <ExternalLink className="ml-1 h-4 w-4" />
               </a>
@@ -174,22 +171,12 @@ export default function ProfilePage() {
 
               <div className="space-y-2">
                 <Label htmlFor="location">Location</Label>
-                <Input
-                  id="location"
-                  name="location"
-                  placeholder="Nairobi, Kenya"
-                  required
-                />
+                <Input id="location" name="location" placeholder="Nairobi, Kenya" required />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="role">Role</Label>
-                <Input
-                  id="role"
-                  name="role"
-                  placeholder="Developer / Student"
-                  required
-                />
+                <Input id="role" name="role" placeholder="Developer / Student" required />
               </div>
 
               <div className="space-y-2">
@@ -236,10 +223,8 @@ export default function ProfilePage() {
 
               <div className="space-y-2">
                 <Label htmlFor="image">Profile Image</Label>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Maximum file size: 1MB
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <p className="text-muted-foreground mt-1 text-xs">Maximum file size: 1MB</p>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div className="flex items-center gap-2">
                     <Input
                       id="image"
@@ -250,9 +235,9 @@ export default function ProfilePage() {
                       className="flex-1"
                     />
                     {imagePreview && (
-                      <Button 
-                        type="button" 
-                        variant="destructive" 
+                      <Button
+                        type="button"
+                        variant="destructive"
                         size="sm"
                         onClick={handleDeleteImage}
                         className="whitespace-nowrap"
@@ -261,7 +246,7 @@ export default function ProfilePage() {
                       </Button>
                     )}
                   </div>
-                  <div className="border rounded-md flex items-center justify-center h-32 overflow-hidden relative">
+                  <div className="relative flex h-32 items-center justify-center overflow-hidden rounded-md border">
                     {imagePreview ? (
                       <div className="absolute inset-0">
                         <Image
@@ -272,9 +257,7 @@ export default function ProfilePage() {
                         />
                       </div>
                     ) : (
-                      <span className="text-muted-foreground">
-                        Image preview
-                      </span>
+                      <span className="text-muted-foreground">Image preview</span>
                     )}
                   </div>
                 </div>
@@ -283,14 +266,14 @@ export default function ProfilePage() {
             <CardFooter>
               <Button
                 type="submit"
-                className="w-full h-12 mt-4 cursor-pointer"
+                className="mt-4 h-12 w-full cursor-pointer"
                 disabled={isSubmitting || !!pullRequestUrl}
               >
                 {isSubmitting
                   ? "Submitting..."
                   : pullRequestUrl
-                  ? "Profile Submitted"
-                  : "Submit Profile"}
+                    ? "Profile Submitted"
+                    : "Submit Profile"}
               </Button>
             </CardFooter>
           </form>

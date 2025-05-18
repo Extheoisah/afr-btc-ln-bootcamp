@@ -52,4 +52,4 @@ export interface Bootcamp {
   instructors?: Instructor[];
   projects?: Project[];
   sponsors?: Sponsor[];
-} 
+}

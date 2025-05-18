@@ -27,23 +27,21 @@ export default function Navbar() {
   return (
     <nav className="border-b">
       <div className="container mx-auto px-4 py-3">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <Bitcoin className="h-6 w-6 text-amber-500" />
-            <span className="font-bold text-lg">AFR Bitcoin Bootcamp</span>
+            <span className="text-lg font-bold">AFR Bitcoin Bootcamp</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden items-center space-x-6 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === link.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                  "hover:text-primary text-sm font-medium transition-colors",
+                  pathname === link.href ? "text-primary" : "text-muted-foreground"
                 )}
               >
                 {link.label}
@@ -59,26 +57,20 @@ export default function Navbar() {
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 space-y-4">
+          <div className="space-y-4 py-4 md:hidden">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "block py-2 text-sm font-medium transition-colors hover:text-primary",
-                  pathname === link.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                  "hover:text-primary block py-2 text-sm font-medium transition-colors",
+                  pathname === link.href ? "text-primary" : "text-muted-foreground"
                 )}
                 onClick={() => setIsMenuOpen(false)}
               >

@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     // Fetch current data from the public JSON files
     const studentsResponse = await fetch(`${protocol}://${host}/data/students.json`);
     const bootcampsResponse = await fetch(`${protocol}://${host}/data/bootcamps.json`);
-    
+
     const studentsData = await studentsResponse.json();
     const bootcampsData = (await bootcampsResponse.json()) as Bootcamp[];
 
@@ -46,10 +46,7 @@ export async function POST(request: Request) {
     // Find the bootcamp and add student ID
     const bootcampIndex = bootcampsData.findIndex((b: Bootcamp) => b.id === profileData.bootcampId);
     if (bootcampIndex === -1) {
-      return NextResponse.json(
-        { error: "Bootcamp not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Bootcamp not found" }, { status: 404 });
     }
 
     // Initialize students array if it doesn't exist
@@ -98,9 +95,6 @@ ${profileData.bio ? `\n### Bio\n${profileData.bio}` : ""}
     return NextResponse.json(result);
   } catch (error) {
     console.error("Error saving profile:", error);
-    return NextResponse.json(
-      { error: "Failed to save profile" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to save profile" }, { status: 500 });
   }
-} 
+}

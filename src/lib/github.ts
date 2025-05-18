@@ -32,11 +32,7 @@ interface GitHubError {
   message: string;
 }
 
-export async function createPullRequest({
-  title,
-  body,
-  files,
-}: CreatePullRequestParams) {
+export async function createPullRequest({ title, body, files }: CreatePullRequestParams) {
   try {
     console.log(`Creating pull request for ${files.length} files in ${REPO_OWNER}/${REPO_NAME}`);
 
@@ -122,4 +118,4 @@ export async function createPullRequest({
     }
     throw new Error("Failed to create pull request");
   }
-} 
+}

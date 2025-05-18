@@ -1,26 +1,23 @@
-"use server"
+"use server";
 
-import { createPullRequest } from "./github"
-import { getBootcamps, getProjects } from "./data"
-import type { Project } from "@/types/bootcamp"
-import type { Bootcamp } from "@/types/bootcamp"
+import { createPullRequest } from "./github";
+import { getBootcamps, getProjects } from "./data";
+import type { Project } from "@/types/bootcamp";
+import type { Bootcamp } from "@/types/bootcamp";
 
 interface ProjectData {
-  name: string
-  description: string
-  bootcampId: string
-  githubUrl?: string
-  demoUrl?: string
-  image?: string | null
+  name: string;
+  description: string;
+  bootcampId: string;
+  githubUrl?: string;
+  demoUrl?: string;
+  image?: string | null;
 }
 
 export async function submitProject(projectData: ProjectData) {
   try {
     // Fetch current data
-    const [currentProjects, currentBootcamps] = await Promise.all([
-      getProjects(),
-      getBootcamps(),
-    ]);
+    const [currentProjects, currentBootcamps] = await Promise.all([getProjects(), getBootcamps()]);
 
     // Create deep copies to avoid mutating the original data
     const projects = JSON.parse(JSON.stringify(currentProjects));
@@ -74,7 +71,7 @@ export async function submitProject(projectData: ProjectData) {
         const fileName = `${imageId}.${imageType}`;
         const imagePath = `/uploads/projects/${fileName}`;
         newProject.image = imagePath;
-        
+
         files.push({
           path: `public${imagePath}`,
           content: matches[2], // base64 content
@@ -106,4 +103,4 @@ ${projectData.demoUrl ? `- **Demo URL**: ${projectData.demoUrl}` : ""}
     console.error("Error submitting project:", error);
     throw new Error("Failed to submit project");
   }
-} 
+}

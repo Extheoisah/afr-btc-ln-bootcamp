@@ -1,12 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getBootcampWithDetails } from "@/lib/data";
 import { ArrowLeft, MapPin, Calendar, ExternalLink } from "lucide-react";
@@ -28,21 +22,17 @@ export default async function BootcampPage(props: BootcampPageProps) {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <Link
-        href="/bootcamps"
-        className="flex items-center mb-6 text-sm hover:underline"
-      >
+      <Link href="/bootcamps" className="mb-6 flex items-center text-sm hover:underline">
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to all bootcamps
       </Link>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <div className="h-64 overflow-hidden relative mb-8">
+          <div className="relative mb-8 h-64 overflow-hidden">
             <Image
               src={
-                bootcamp.image ||
-                `/placeholder.svg?height=400&width=800&text=${bootcamp.location}`
+                bootcamp.image || `/placeholder.svg?height=400&width=800&text=${bootcamp.location}`
               }
               alt={`${bootcamp.location} Bootcamp`}
               fill
@@ -51,11 +41,9 @@ export default async function BootcampPage(props: BootcampPageProps) {
           </div>
 
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-4">
-              {bootcamp.location} Bootcamp
-            </h1>
-            <div className="flex flex-wrap gap-4 mb-4">
-              <div className="flex items-center text-muted-foreground">
+            <h1 className="mb-4 text-3xl font-bold">{bootcamp.location} Bootcamp</h1>
+            <div className="mb-4 flex flex-wrap gap-4">
+              <div className="text-muted-foreground flex items-center">
                 <Calendar className="mr-2 h-4 w-4" />
                 {new Date(bootcamp.date).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -63,7 +51,7 @@ export default async function BootcampPage(props: BootcampPageProps) {
                   day: "numeric",
                 })}
               </div>
-              <div className="flex items-center text-muted-foreground">
+              <div className="text-muted-foreground flex items-center">
                 <MapPin className="mr-2 h-4 w-4" />
                 {bootcamp.location}
               </div>
@@ -78,12 +66,12 @@ export default async function BootcampPage(props: BootcampPageProps) {
             </TabsList>
 
             <TabsContent value="students" className="space-y-6">
-              <h2 className="text-2xl font-bold mb-4">Students</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <h2 className="mb-4 text-2xl font-bold">Students</h2>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {bootcamp.students.length > 0 ? (
                   bootcamp.students.map((student) => (
                     <Card key={student.id}>
-                      <div className="h-32 w-32 overflow-hidden rounded-full relative mx-auto mt-6">
+                      <div className="relative mx-auto mt-6 h-32 w-32 overflow-hidden rounded-full">
                         <Image
                           src={
                             student.image ||
@@ -101,20 +89,16 @@ export default async function BootcampPage(props: BootcampPageProps) {
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm text-muted-foreground">
-                          {student.role}
-                        </p>
+                        <p className="text-muted-foreground text-sm">{student.role}</p>
                         {student.bio && (
-                          <p className="text-sm text-muted-foreground mt-2">
-                            {student.bio}
-                          </p>
+                          <p className="text-muted-foreground mt-2 text-sm">{student.bio}</p>
                         )}
                         {student.githubUrl && (
                           <a
                             href={student.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center text-sm text-primary hover:underline mt-2"
+                            className="text-primary mt-2 flex items-center text-sm hover:underline"
                           >
                             GitHub <ExternalLink className="ml-1 h-3 w-3" />
                           </a>
@@ -123,14 +107,11 @@ export default async function BootcampPage(props: BootcampPageProps) {
                     </Card>
                   ))
                 ) : (
-                  <div className="flex justify-start items-start h-full flex-col gap-2">
+                  <div className="flex h-full flex-col items-start justify-start gap-2">
                     <p className="text-black">No students</p>
                     <p className="text-muted-foreground">
                       Were you a student?{" "}
-                      <Link
-                        href="/profile"
-                        className="text-primary hover:underline"
-                      >
+                      <Link href="/profile" className="text-primary hover:underline">
                         Add your profile
                       </Link>
                     </p>
@@ -140,12 +121,12 @@ export default async function BootcampPage(props: BootcampPageProps) {
             </TabsContent>
 
             <TabsContent value="instructors" className="space-y-6">
-              <h2 className="text-2xl font-bold mb-4">Instructors</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <h2 className="mb-4 text-2xl font-bold">Instructors</h2>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {bootcamp.instructors.length > 0 ? (
                   bootcamp.instructors.map((instructor) => (
                     <Card key={instructor.id}>
-                      <div className="h-32 w-32 overflow-hidden rounded-full relative mx-auto mt-6">
+                      <div className="relative mx-auto mt-6 h-32 w-32 overflow-hidden rounded-full">
                         <Image
                           src={
                             instructor.image ||
@@ -159,18 +140,13 @@ export default async function BootcampPage(props: BootcampPageProps) {
                       <CardHeader>
                         <CardTitle>{instructor.name}</CardTitle>
                         <CardDescription className="flex items-center">
-                          <MapPin className="mr-1 h-3 w-3" />{" "}
-                          {instructor.location}
+                          <MapPin className="mr-1 h-3 w-3" /> {instructor.location}
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm text-muted-foreground">
-                          {instructor.expertise}
-                        </p>
+                        <p className="text-muted-foreground text-sm">{instructor.expertise}</p>
                         {instructor.bio && (
-                          <p className="text-sm text-muted-foreground mt-2">
-                            {instructor.bio}
-                          </p>
+                          <p className="text-muted-foreground mt-2 text-sm">{instructor.bio}</p>
                         )}
                       </CardContent>
                     </Card>
@@ -182,8 +158,8 @@ export default async function BootcampPage(props: BootcampPageProps) {
             </TabsContent>
 
             <TabsContent value="projects" className="space-y-6">
-              <h2 className="text-2xl font-bold mb-4">Projects</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <h2 className="mb-4 text-2xl font-bold">Projects</h2>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 {bootcamp.projects.length > 0 ? (
                   bootcamp.projects.map((project) => (
                     <Card key={project.id}>
@@ -192,13 +168,13 @@ export default async function BootcampPage(props: BootcampPageProps) {
                       </CardHeader>
                       <CardContent>
                         <p>{project.description}</p>
-                        <div className="flex gap-4 mt-4">
+                        <div className="mt-4 flex gap-4">
                           {project.githubUrl && (
                             <a
                               href={project.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center text-sm text-primary hover:underline"
+                              className="text-primary flex items-center text-sm hover:underline"
                             >
                               GitHub <ExternalLink className="ml-1 h-3 w-3" />
                             </a>
@@ -208,7 +184,7 @@ export default async function BootcampPage(props: BootcampPageProps) {
                               href={project.demoUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center text-sm text-primary hover:underline"
+                              className="text-primary flex items-center text-sm hover:underline"
                             >
                               Demo <ExternalLink className="ml-1 h-3 w-3" />
                             </a>
@@ -218,7 +194,15 @@ export default async function BootcampPage(props: BootcampPageProps) {
                     </Card>
                   ))
                 ) : (
-                  <p className="text-black">No projects</p>
+                  <div className="flex h-full flex-col items-start justify-start gap-2">
+                    <p className="text-black">No projects</p>
+                    <p className="text-muted-foreground">
+                      Were you a student?{" "}
+                      <Link href="/projects" className="text-primary hover:underline">
+                        Add your project
+                      </Link>
+                    </p>
+                  </div>
                 )}
               </div>
             </TabsContent>
@@ -234,11 +218,10 @@ export default async function BootcampPage(props: BootcampPageProps) {
               {bootcamp.sponsors.length > 0 ? (
                 bootcamp.sponsors.map((sponsor) => (
                   <div key={sponsor.id} className="flex items-center space-x-4">
-                    <div className="h-12 w-12 overflow-hidden rounded relative">
+                    <div className="relative h-12 w-12 overflow-hidden rounded">
                       <Image
                         src={
-                          sponsor.logo ||
-                          `/placeholder.svg?height=50&width=50&text=${sponsor.name}`
+                          sponsor.logo || `/placeholder.svg?height=50&width=50&text=${sponsor.name}`
                         }
                         alt={sponsor.name}
                         fill
@@ -247,15 +230,13 @@ export default async function BootcampPage(props: BootcampPageProps) {
                     </div>
                     <div>
                       <h3 className="font-medium">{sponsor.name}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {sponsor.type}
-                      </p>
+                      <p className="text-muted-foreground text-sm">{sponsor.type}</p>
                       {sponsor.website && (
                         <a
                           href={sponsor.website}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-primary hover:underline flex items-center mt-1"
+                          className="text-primary mt-1 flex items-center text-sm hover:underline"
                         >
                           Website <ExternalLink className="ml-1 h-3 w-3" />
                         </a>

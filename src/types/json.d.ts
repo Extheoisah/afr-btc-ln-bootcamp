@@ -23,4 +23,4 @@ declare module "@/public/data/projects.json" {
 declare module "@/public/data/sponsors.json" {
   const value: Sponsor[];
   export default value;
-} 
+}
